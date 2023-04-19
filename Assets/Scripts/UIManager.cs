@@ -8,7 +8,7 @@ public class UIManager : MonoBehaviour
 
    
     [SerializeField] private Slider _foodSlider, _healthSlider, _oxygenSlider;
-    [SerializeField] private Button _addFood, _addOxygen;
+     private Button _addFood, _addOxygen;
     void Start()
     {
         
@@ -34,17 +34,27 @@ public class UIManager : MonoBehaviour
 
         
         //FOOD
-        GameManager.Instance._playerFood -= Time.deltaTime * 2;
+        GameManager.Instance._playerFood -= Time.deltaTime * 7;
 
         //Oxygen
-        GameManager.Instance._playerOxygen -= Time.deltaTime * 2;
+        GameManager.Instance._playerOxygen -= Time.deltaTime * 7;
 
         //Health
         if(GameManager.Instance._playerFood <= 0 && GameManager.Instance._playerOxygen <= 0)
         {
+            GameManager.Instance._playerHealth -= Time.deltaTime * 6;
+        }
+
+        if (GameManager.Instance._playerFood <= 0 && GameManager.Instance._playerOxygen >= 0)
+        {
+            GameManager.Instance._playerHealth -= Time.deltaTime * 2;
+        }
+
+        if (GameManager.Instance._playerFood >= 0 && GameManager.Instance._playerOxygen <= 0)
+        {
             GameManager.Instance._playerHealth -= Time.deltaTime * 4;
         }
-        
+
     }
 
     public void AddFood(int value)
@@ -58,9 +68,9 @@ public class UIManager : MonoBehaviour
     private void SetMaxValues()
     {
         //Set food to 100 if food is over 100
-        GameManager.Instance._playerFood = (GameManager.Instance._playerFood <= 100) ? 100 : GameManager.Instance._playerFood;
+        GameManager.Instance._playerFood = (GameManager.Instance._playerFood >= 100) ? 100 : GameManager.Instance._playerFood;
         //Set food to 0 if food is under 0
-        GameManager.Instance._playerFood = (GameManager.Instance._playerFood >= 0) ? 0 : GameManager.Instance._playerFood;
+        GameManager.Instance._playerFood = (GameManager.Instance._playerFood <= 0) ? 0 : GameManager.Instance._playerFood;
 
         //Set health to 100 if health is over 100
         GameManager.Instance._playerHealth = (GameManager.Instance._playerHealth >= 100) ? 100 : GameManager.Instance._playerHealth;
