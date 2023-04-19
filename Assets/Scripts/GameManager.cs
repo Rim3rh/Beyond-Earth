@@ -5,8 +5,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    public int _playerHealth, _playerHunger, _playerOxygen;
-
+    public float _playerHealth, _playerFood, _playerOxygen;
+    
 
     private void Awake()
     {
@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         _playerHealth = 100;
-        _playerHunger = 100;
+        _playerFood = 100;
         _playerOxygen = 100;
     }
 
