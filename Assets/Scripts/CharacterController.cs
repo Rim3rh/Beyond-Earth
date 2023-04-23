@@ -103,12 +103,10 @@ public class CharacterController : MonoBehaviour
         if (other.CompareTag("Finish"))
         {
             Debug.Log("Gola");
-            _item = other.GetComponent<GameObject>();
-            Debug.Log(other
-               
-                
-                
-                );
+            _item = other.gameObject; 
+            
+
+            Debug.Log(other);
         }
 
     }
