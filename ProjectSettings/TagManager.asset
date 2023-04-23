@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Oxigeno
+  - OxygenRecharge
+  - Oxigeno2
   layers:
   - Default
   - TransparentFX

@@ -9,6 +9,8 @@ public class UIManager : MonoBehaviour
    
     [SerializeField] private Slider _foodSlider, _healthSlider, _oxygenSlider;
      private Button _addFood, _addOxygen;
+
+   
     void Start()
     {
         
@@ -37,10 +39,11 @@ public class UIManager : MonoBehaviour
         GameManager.Instance._playerFood -= Time.deltaTime * 7;
 
         //Oxygen
-        GameManager.Instance._playerOxygen -= Time.deltaTime * 7;
+        GameManager.Instance._playerOxygen = (CharacterController._holdingMainTank) ? GameManager.Instance._tank1OxygenLevel : GameManager.Instance._tank2OxygenLevel;
+
 
         //Health
-        if(GameManager.Instance._playerFood <= 0 && GameManager.Instance._playerOxygen <= 0)
+        if (GameManager.Instance._playerFood <= 0 && GameManager.Instance._playerOxygen <= 0)
         {
             GameManager.Instance._playerHealth -= Time.deltaTime * 6;
         }
