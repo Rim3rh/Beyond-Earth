@@ -6,22 +6,29 @@ using UnityEngine.InputSystem;
 
 public class CharacterController : MonoBehaviour
 {
+    public static bool _holdingMainTank;
+    public static bool _holdingSecondaryTank;
+
 
     private PlayerInputActions playerInputActions;
     private Vector2 _moveInput;
     private Rigidbody _rb;
     private int _speed;
 
-    public GameObject _oxygenSlot;
+    public GameObject _pickUpSlot;
 
 
-    public static bool _holdingMainTank;
-    public static bool _holdingSecondaryTank;
+ 
 
     private GameObject _item;
+    private bool _isHolding;
+    private float timer, timer2;
 
     void Awake()
     {
+        timer2 = 0.5f;
+        timer = 0f;
+        _isHolding = false;
         _holdingSecondaryTank = false;
         _holdingMainTank = true ;
         _speed = 10;
@@ -44,33 +51,44 @@ public class CharacterController : MonoBehaviour
         
         if (_item != null)
         {
-            Debug.Log(_item);
-            _item.transform.position = _oxygenSlot.transform.position;
-        }
-        
+
+            if (Input.GetKeyDown(KeyCode.E) && !_isHolding && timer <= 0)
+            {
+                
+               
+                _isHolding = true;
+                timer2 = 0.5f;
+            }
+            if (Input.GetKeyDown(KeyCode.E) && _isHolding && timer2 <= 0)
+            {
+                
+                
+                _isHolding = false;
+                _item = null;
+                timer = 0.5f;
+                
+            }
+            if (_isHolding)
+            {
+                _item.transform.position = _pickUpSlot.transform.position;
+                timer2 -= Time.deltaTime;
+            }   
+            if (!_isHolding)
+            {
+                timer -= Time.deltaTime;
+            }
 
 
-        Debug.Log(_holdingMainTank);
-        Debug.Log("SEGUNDO" + _holdingSecondaryTank);
 
-
-
-
+        }      
         Rotation();
         _moveInput = playerInputActions.PlayerMov.Movement.ReadValue<Vector2>();
-
-
-
-       
-
-
-
     }
 
 
     private void FixedUpdate()
     {
-        Debug.Log("HGOAL");
+        
         _rb.velocity = new Vector3(_moveInput.x * _speed, 0, _moveInput.y * _speed);
     }
 
@@ -100,13 +118,18 @@ public class CharacterController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Finish"))
+        if (other.CompareTag("Pickeable"))
         {
-            Debug.Log("Gola");
-            _item = other.gameObject; 
-            
+            Debug.Log("GOLA");
+            _item = other.gameObject;  
+        }
 
-            Debug.Log(other);
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Pickeable"))
+        {
+            _item = null;
         }
 
     }
