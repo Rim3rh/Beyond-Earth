@@ -10,7 +10,7 @@ public class CharacterController : MonoBehaviour
     public static bool _holdingSecondaryTank;
 
 
-    private PlayerInputActions playerInputActions;
+    
     private Vector2 _moveInput;
     private Rigidbody _rb;
     
@@ -35,26 +35,21 @@ public class CharacterController : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
 
         //Adding new input system, First add reference to input system class
-        playerInputActions = new PlayerInputActions();
+        
         //now, we want to acces the class, acces de PlayerMov action map, and then the Interact Action, followed by the preformed stage
         // then you add that to that the name of the new class you have created(se deberia crear sola pero ns)
         //playerInputActions.PlayerMov.Interact.started += Interact;
-        playerInputActions.Enable();
-        playerInputActions.PlayerMov.Interact.started += Interact;
+       
         
 
        
     }
 
-    private void Interact(InputAction.CallbackContext context)
-    {
-        Debug.Log(context);
-
-    }
+    
 
     void Update()
     {
-        _moveInput = playerInputActions.PlayerMov.Movement.ReadValue<Vector2>();
+        _moveInput = GameManager.Instance._moveInput;
         Rotation();
        
 

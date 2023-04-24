@@ -7,16 +7,23 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public float _playerHealth, _playerFood, _playerOxygen, _tank1OxygenLevel, _tank2OxygenLevel;
 
+    private PlayerInputActions playerInputActions;
+
     public float timer, timer2;
     public GameObject _interactCanvas;
     public int _speed;
 
+    public Vector2 _moveInput;
+
 
     private void Awake()
     {
+        playerInputActions = new PlayerInputActions();
 
+        playerInputActions.Enable();
+       // playerInputActions.PlayerMov.Interact.started += Interact;
 
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = this;
         }
@@ -51,5 +58,10 @@ public class GameManager : MonoBehaviour
     public void HudInteractOff()
     {
         _interactCanvas.SetActive(false);
+    }
+
+    private void Update()
+    {
+        _moveInput = playerInputActions.PlayerMov.Movement.ReadValue<Vector2>();
     }
 }
