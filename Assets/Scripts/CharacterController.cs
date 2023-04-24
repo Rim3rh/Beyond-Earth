@@ -13,7 +13,7 @@ public class CharacterController : MonoBehaviour
     private PlayerInputActions playerInputActions;
     private Vector2 _moveInput;
     private Rigidbody _rb;
-    private int _speed;
+    
 
     public GameObject _pickUpSlot;
 
@@ -31,7 +31,7 @@ public class CharacterController : MonoBehaviour
         _isHolding = false;
         _holdingSecondaryTank = false;
         _holdingMainTank = true ;
-        _speed = 10;
+        
         _rb = GetComponent<Rigidbody>();
 
         //Adding new input system, First add reference to input system class
@@ -39,16 +39,25 @@ public class CharacterController : MonoBehaviour
         //now, we want to acces the class, acces de PlayerMov action map, and then the Interact Action, followed by the preformed stage
         // then you add that to that the name of the new class you have created(se deberia crear sola pero ns)
         //playerInputActions.PlayerMov.Interact.started += Interact;
-        playerInputActions.PlayerMov.Enable();
+        playerInputActions.Enable();
+        playerInputActions.PlayerMov.Interact.started += Interact;
+        
 
        
     }
 
-    
+    private void Interact(InputAction.CallbackContext context)
+    {
+        Debug.Log(context);
+
+    }
 
     void Update()
     {
-        
+        _moveInput = playerInputActions.PlayerMov.Movement.ReadValue<Vector2>();
+        Rotation();
+       
+
         if (_item != null)
         {
 
@@ -66,30 +75,32 @@ public class CharacterController : MonoBehaviour
                 _isHolding = false;
                 _item = null;
                 timer = 0.5f;
-                
+                GameManager.Instance._speed = 10;
             }
             if (_isHolding)
             {
                 _item.transform.position = _pickUpSlot.transform.position;
                 timer2 -= Time.deltaTime;
+                GameManager.Instance._speed = 6;
             }   
             if (!_isHolding)
             {
                 timer -= Time.deltaTime;
+                
             }
 
 
 
         }      
-        Rotation();
-        _moveInput = playerInputActions.PlayerMov.Movement.ReadValue<Vector2>();
+        
+       
     }
 
 
     private void FixedUpdate()
     {
         
-        _rb.velocity = new Vector3(_moveInput.x * _speed, 0, _moveInput.y * _speed);
+        _rb.velocity = new Vector3(_moveInput.x * GameManager.Instance._speed, 0, _moveInput.y * GameManager.Instance._speed);
     }
 
 
@@ -121,7 +132,8 @@ public class CharacterController : MonoBehaviour
         if (other.CompareTag("Pickeable"))
         {
             Debug.Log("GOLA");
-            _item = other.gameObject;  
+            _item = other.gameObject;
+            GameManager.Instance.HudInteractOn();
         }
 
     }
@@ -130,6 +142,7 @@ public class CharacterController : MonoBehaviour
         if (other.CompareTag("Pickeable"))
         {
             _item = null;
+            GameManager.Instance.HudInteractOff();
         }
 
     }

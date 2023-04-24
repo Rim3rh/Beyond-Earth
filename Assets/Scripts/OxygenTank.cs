@@ -80,6 +80,7 @@ public class OxygenTank : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             _inRange = true;
+            
 
 
         } 
@@ -88,8 +89,8 @@ public class OxygenTank : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+           
 
-          
             _inRange = false;
         }
     
