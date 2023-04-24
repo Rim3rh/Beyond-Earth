@@ -28,14 +28,15 @@ public class FadeInFadeOut : MonoBehaviour
             }
         }
     }
-
+    /*
     IEnumerator ChangeToSceneB()
     {
-        Animation.set
+       // Animation.set
     }
 
     IEnumerator ChangeToSceneA()
     {
 
     }
+    */
 }
