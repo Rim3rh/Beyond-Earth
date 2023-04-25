@@ -44,14 +44,23 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ChangeTank"",
+                    ""type"": ""Button"",
+                    ""id"": ""b321f861-41f4-4e96-afd2-c7912974f836"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""b566a69f-6192-4a54-85b4-ebbbe5051263"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": ""Hold(duration=0.4,pressPoint=0.5)"",
+                    ""id"": ""0ef769d2-981e-4d19-8900-acf3900accdb"",
+                    ""path"": ""<DualShockGamepad>/buttonSouth"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Interact"",
@@ -60,8 +69,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""0ef769d2-981e-4d19-8900-acf3900accdb"",
-                    ""path"": ""<DualShockGamepad>/buttonSouth"",
+                    ""id"": ""3782ab8a-e253-44ee-81b7-1bcc222cb866"",
+                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -123,6 +132,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1f6ecba8-cf82-4c24-99e0-0660f194266c"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeTank"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -161,6 +181,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_PlayerMov = asset.FindActionMap("PlayerMov", throwIfNotFound: true);
         m_PlayerMov_Interact = m_PlayerMov.FindAction("Interact", throwIfNotFound: true);
         m_PlayerMov_Movement = m_PlayerMov.FindAction("Movement", throwIfNotFound: true);
+        m_PlayerMov_ChangeTank = m_PlayerMov.FindAction("ChangeTank", throwIfNotFound: true);
         // PauseMenu
         m_PauseMenu = asset.FindActionMap("PauseMenu", throwIfNotFound: true);
         m_PauseMenu_Newaction = m_PauseMenu.FindAction("New action", throwIfNotFound: true);
@@ -227,12 +248,14 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private List<IPlayerMovActions> m_PlayerMovActionsCallbackInterfaces = new List<IPlayerMovActions>();
     private readonly InputAction m_PlayerMov_Interact;
     private readonly InputAction m_PlayerMov_Movement;
+    private readonly InputAction m_PlayerMov_ChangeTank;
     public struct PlayerMovActions
     {
         private @PlayerInputActions m_Wrapper;
         public PlayerMovActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Interact => m_Wrapper.m_PlayerMov_Interact;
         public InputAction @Movement => m_Wrapper.m_PlayerMov_Movement;
+        public InputAction @ChangeTank => m_Wrapper.m_PlayerMov_ChangeTank;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMov; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -248,6 +271,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
+            @ChangeTank.started += instance.OnChangeTank;
+            @ChangeTank.performed += instance.OnChangeTank;
+            @ChangeTank.canceled += instance.OnChangeTank;
         }
 
         private void UnregisterCallbacks(IPlayerMovActions instance)
@@ -258,6 +284,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Movement.started -= instance.OnMovement;
             @Movement.performed -= instance.OnMovement;
             @Movement.canceled -= instance.OnMovement;
+            @ChangeTank.started -= instance.OnChangeTank;
+            @ChangeTank.performed -= instance.OnChangeTank;
+            @ChangeTank.canceled -= instance.OnChangeTank;
         }
 
         public void RemoveCallbacks(IPlayerMovActions instance)
@@ -325,6 +354,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     {
         void OnInteract(InputAction.CallbackContext context);
         void OnMovement(InputAction.CallbackContext context);
+        void OnChangeTank(InputAction.CallbackContext context);
     }
     public interface IPauseMenuActions
     {

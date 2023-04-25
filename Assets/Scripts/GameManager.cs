@@ -6,23 +6,16 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     public float _playerHealth, _playerFood, _playerOxygen, _tank1OxygenLevel, _tank2OxygenLevel;
-
-    private PlayerInputActions playerInputActions;
-
     public float timer, timer2;
     public GameObject _interactCanvas;
     public int _speed;
-
-    public Vector2 _moveInput;
+    public bool _holdingMainTank;
+    public bool _holdingSecondaryTank;
+    public GameObject _item;
 
 
     private void Awake()
     {
-        playerInputActions = new PlayerInputActions();
-
-        playerInputActions.Enable();
-       // playerInputActions.PlayerMov.Interact.started += Interact;
-
         if (Instance == null)
         {
             Instance = this;
@@ -32,7 +25,9 @@ public class GameManager : MonoBehaviour
             Debug.Log("Hay mas de un GameManager");
         }
     }
+
     
+
     void Start()
     {
         timer = 0.5f;
@@ -43,6 +38,8 @@ public class GameManager : MonoBehaviour
         _playerHealth = 100;
         _playerFood = 100;
         _playerOxygen = 100;
+        _holdingSecondaryTank = false;
+        _holdingMainTank = true;
 
         _interactCanvas.SetActive(false);
     }
@@ -60,8 +57,4 @@ public class GameManager : MonoBehaviour
         _interactCanvas.SetActive(false);
     }
 
-    private void Update()
-    {
-        _moveInput = playerInputActions.PlayerMov.Movement.ReadValue<Vector2>();
-    }
 }

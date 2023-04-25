@@ -22,14 +22,23 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "ChangeTank",
+                    "type": "Button",
+                    "id": "b321f861-41f4-4e96-afd2-c7912974f836",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
                     "name": "",
-                    "id": "b566a69f-6192-4a54-85b4-ebbbe5051263",
-                    "path": "<Keyboard>/e",
-                    "interactions": "Hold(duration=0.4,pressPoint=0.5)",
+                    "id": "0ef769d2-981e-4d19-8900-acf3900accdb",
+                    "path": "<DualShockGamepad>/buttonSouth",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Interact",
@@ -38,8 +47,8 @@
                 },
                 {
                     "name": "",
-                    "id": "0ef769d2-981e-4d19-8900-acf3900accdb",
-                    "path": "<DualShockGamepad>/buttonSouth",
+                    "id": "3782ab8a-e253-44ee-81b7-1bcc222cb866",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -101,6 +110,17 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "1f6ecba8-cf82-4c24-99e0-0660f194266c",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeTank",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },

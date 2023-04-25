@@ -39,7 +39,7 @@ public class UIManager : MonoBehaviour
         GameManager.Instance._playerFood -= Time.deltaTime * 7;
 
         //Oxygen
-        GameManager.Instance._playerOxygen = (CharacterController._holdingMainTank) ? GameManager.Instance._tank1OxygenLevel : GameManager.Instance._tank2OxygenLevel;
+        GameManager.Instance._playerOxygen = (GameManager.Instance._holdingMainTank) ? GameManager.Instance._tank1OxygenLevel : GameManager.Instance._tank2OxygenLevel;
 
 
         //Health

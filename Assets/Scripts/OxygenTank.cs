@@ -21,29 +21,28 @@ public class OxygenTank : MonoBehaviour
 
 
 
-    public Renderer _oxygenRender;
-    public Material _green;
-    public Material _red;
-    public Material _orange;
-    
+    public MeshRenderer _oxygenRender;
+    [SerializeField] Color _myColor;
+    [SerializeField] Color _myColor2;
 
-   
+
+
 
     void Start()
     {
-        
+        _oxygenRender = GetComponent<MeshRenderer>();
         _inRange = false;
     }
 
 
     void Update()
     {
+        SetLimits();
+        //Debug.Log(GameManager.Instance._tank1OxygenLevel);
+        _oxygenRender.material.color = Color.Lerp(_myColor, _myColor2, GameManager.Instance._tank1OxygenLevel / 100);
 
-        if (GameManager.Instance._tank1OxygenLevel > 60 && GameManager.Instance._tank1OxygenLevel <= 100) _oxygenRender.material = _green;
-        if (GameManager.Instance._tank1OxygenLevel > 30 && GameManager.Instance._tank1OxygenLevel < 60) _oxygenRender.material = _orange;
-        if (GameManager.Instance._tank1OxygenLevel > 0 && GameManager.Instance._tank1OxygenLevel < 30) _oxygenRender.material = _red;
 
-        if (CharacterController._holdingSecondaryTank)
+        if (GameManager.Instance._holdingSecondaryTank && (GameManager.Instance._item == null || !GameManager.Instance._item.CompareTag("Oxigeno")))
         {
             GameManager.Instance.timer -= Time.deltaTime;
             if (_inRange)
@@ -51,15 +50,15 @@ public class OxygenTank : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.E) && GameManager.Instance.timer < 0)
                 {
                     _secondaryTank.transform.position = _oxygenDrop.transform.position;
-                    CharacterController._holdingMainTank = true;
-                    CharacterController._holdingSecondaryTank = false;
+                    GameManager.Instance._holdingMainTank = true;
+                    GameManager.Instance._holdingSecondaryTank = false;
                     GameManager.Instance.timer2 = 0.5f;
                 }
-            }
+            } 
         }
 
 
-        if (CharacterController._holdingMainTank)
+        if (GameManager.Instance._holdingMainTank)
         {
 
 
@@ -72,7 +71,12 @@ public class OxygenTank : MonoBehaviour
 
     }
                    
+    private void SetLimits()
+    {
+        GameManager.Instance._tank1OxygenLevel = (GameManager.Instance._tank1OxygenLevel >= 100) ? 100 : GameManager.Instance._tank1OxygenLevel;
 
+        GameManager.Instance._tank1OxygenLevel = (GameManager.Instance._tank1OxygenLevel <= 0) ? 0 : GameManager.Instance._tank1OxygenLevel;
+    }
 
 
     private void OnTriggerEnter(Collider other)

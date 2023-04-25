@@ -6,8 +6,7 @@ using UnityEngine.InputSystem;
 
 public class CharacterController : MonoBehaviour
 {
-    public static bool _holdingMainTank;
-    public static bool _holdingSecondaryTank;
+
 
 
     
@@ -17,88 +16,78 @@ public class CharacterController : MonoBehaviour
 
     public GameObject _pickUpSlot;
 
+    private PlayerInputActions playerInputActions;
 
- 
 
-    private GameObject _item;
+    
     private bool _isHolding;
     private float timer, timer2;
+    private GameObject _itemTem;
 
     void Awake()
     {
+        playerInputActions = new PlayerInputActions();
         timer2 = 0.5f;
         timer = 0f;
         _isHolding = false;
-        _holdingSecondaryTank = false;
-        _holdingMainTank = true ;
         
         _rb = GetComponent<Rigidbody>();
 
-        //Adding new input system, First add reference to input system class
-        
-        //now, we want to acces the class, acces de PlayerMov action map, and then the Interact Action, followed by the preformed stage
-        // then you add that to that the name of the new class you have created(se deberia crear sola pero ns)
-        //playerInputActions.PlayerMov.Interact.started += Interact;
-       
-        
 
-       
+        playerInputActions.PlayerMov.Interact.started += Interact_started;
+        playerInputActions.PlayerMov.Enable();
     }
 
-    
-
-    void Update()
+    private void Interact_started(InputAction.CallbackContext context)
     {
-        _moveInput = GameManager.Instance._moveInput;
-        Rotation();
-       
-
-        if (_item != null)
+        if (_itemTem != null)
         {
 
-            if (Input.GetKeyDown(KeyCode.E) && !_isHolding && timer <= 0)
+            Debug.Log("Entrando1");
+            Debug.Log(_isHolding);
+            Debug.Log(timer);
+            if (context.started && !_isHolding && timer <= 0)
             {
-                
-               
+                Debug.Log("Entrando2");
+                GameManager.Instance._item = _itemTem;
                 _isHolding = true;
                 timer2 = 0.5f;
+                GameManager.Instance._speed = 6;
+                GameManager.Instance.HudInteractOff();
             }
-            if (Input.GetKeyDown(KeyCode.E) && _isHolding && timer2 <= 0)
+            if (context.started && _isHolding && timer2 <= 0)
             {
-                
-                
+                _itemTem = null;
+                GameManager.Instance._item = _itemTem;
                 _isHolding = false;
-                _item = null;
                 timer = 0.5f;
                 GameManager.Instance._speed = 10;
+                GameManager.Instance.HudInteractOn();
             }
+        }
+    }
+    void Update()
+    {
+        _moveInput = playerInputActions.PlayerMov.Movement.ReadValue<Vector2>();
+        Rotation();
+        if (_itemTem != null)
+        { 
             if (_isHolding)
             {
-                _item.transform.position = _pickUpSlot.transform.position;
+
+                GameManager.Instance._item.transform.position = _pickUpSlot.transform.position;
                 timer2 -= Time.deltaTime;
-                GameManager.Instance._speed = 6;
             }   
             if (!_isHolding)
             {
                 timer -= Time.deltaTime;
-                
             }
-
-
-
         }      
-        
-       
     }
-
-
     private void FixedUpdate()
     {
-        
         _rb.velocity = new Vector3(_moveInput.x * GameManager.Instance._speed, 0, _moveInput.y * GameManager.Instance._speed);
     }
-
-
     private void Rotation()
     {
         if (_moveInput.x > 0)
@@ -109,7 +98,6 @@ public class CharacterController : MonoBehaviour
         {
             transform.eulerAngles = new Vector3(0, -90, 0);
         }
-
         if (_moveInput.y > 0)
         {
             transform.eulerAngles = new Vector3(0, 0, 0);
@@ -118,31 +106,23 @@ public class CharacterController : MonoBehaviour
         {
             transform.eulerAngles = new Vector3(0, -180, 0);
         }
-
-
     }
-
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Pickeable"))
+        if (other.CompareTag("Pickeable") || ((other.CompareTag("Oxigeno") && !GameManager.Instance._holdingMainTank)) && !_isHolding)
         {
-            Debug.Log("GOLA");
-            _item = other.gameObject;
+            _itemTem = other.gameObject;
             GameManager.Instance.HudInteractOn();
         }
+
 
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Pickeable"))
+        if (other.CompareTag("Pickeable") || ((other.CompareTag("Oxigeno") && !GameManager.Instance._holdingMainTank)) && !_isHolding)
         {
-            _item = null;
+            _itemTem = null;
             GameManager.Instance.HudInteractOff();
         }
-
     }
-
-
-
-
 }
