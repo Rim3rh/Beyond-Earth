@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class FadeInFadeOut : MonoBehaviour
 {
+    public Animator fadeAnim;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,23 +21,27 @@ public class FadeInFadeOut : MonoBehaviour
 
             if(sceneBuildIndex == 0)
             {
-                SceneManager.LoadScene(1);
+                StartCoroutine(ChangeToSceneB());
             }
             else
             {
-                SceneManager.LoadScene(0);
+                StartCoroutine(ChangeToSceneA());
             }
         }
     }
-    /*
+    
     IEnumerator ChangeToSceneB()
     {
-       // Animation.set
+        fadeAnim.SetTrigger("exit");
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(1);
     }
 
     IEnumerator ChangeToSceneA()
     {
-
+        fadeAnim.SetTrigger("exit");
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(0);
     }
-    */
+    
 }

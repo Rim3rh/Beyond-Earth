@@ -203,6 +203,7 @@ GameObject:
   - component: {fileID: 783958474}
   - component: {fileID: 783958473}
   - component: {fileID: 783958472}
+  - component: {fileID: 783958475}
   m_Layer: 5
   m_Name: Black
   m_TagString: Untagged
@@ -289,6 +290,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 783958470}
   m_CullTransparentMesh: 1
+--- !u!114 &783958475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 783958470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84ae36e5001cff54dbf6884cc3073742, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeAnim: {fileID: 0}
 --- !u!1 &823484248
 GameObject:
   m_ObjectHideFlags: 0
@@ -501,7 +515,7 @@ GameObject:
   - component: {fileID: 1920428577}
   - component: {fileID: 1920428576}
   m_Layer: 5
-  m_Name: Fade
+  m_Name: canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
