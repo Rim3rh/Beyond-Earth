@@ -49,7 +49,7 @@ public class CharacterController : MonoBehaviour
             if (context.started && !_isHolding && timer <= 0)
             {
                 _timerRuning = false;
-                Debug.Log("Entrando2");
+         
                 GameManager.Instance._item = _itemTem;
                 _isHolding = true;
                 timer2 = 0.5f;
@@ -114,7 +114,7 @@ public class CharacterController : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Pickeable") || ((other.CompareTag("Oxigeno") && !GameManager.Instance._holdingMainTank)) && !_isHolding)
+        if (other.CompareTag("Pickeable") || ((other.gameObject.CompareTag("Oxigeno") && !GameManager.Instance._holdingMainTank)) && !_isHolding)
         {
             _itemTem = other.gameObject;
             GameManager.Instance.HudInteractOn();
@@ -122,6 +122,8 @@ public class CharacterController : MonoBehaviour
 
 
     }
+
+    
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Pickeable") || ((other.CompareTag("Oxigeno") && !GameManager.Instance._holdingMainTank)) && !_isHolding)

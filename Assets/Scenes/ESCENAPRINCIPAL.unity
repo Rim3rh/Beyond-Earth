@@ -736,6 +736,7 @@ MonoBehaviour:
   _holdingMainTank: 0
   _holdingSecondaryTank: 0
   _item: {fileID: 0}
+  fadeAnim: {fileID: 686750776}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1549,7 +1550,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84ae36e5001cff54dbf6884cc3073742, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeAnim: {fileID: 686750776}
 --- !u!95 &686750776
 Animator:
   serializedVersion: 5

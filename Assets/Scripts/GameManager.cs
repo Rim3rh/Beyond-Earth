@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public bool _holdingMainTank;
     public bool _holdingSecondaryTank;
     public GameObject _item;
+    public Animator fadeAnim;
 
 
     private void Awake()
