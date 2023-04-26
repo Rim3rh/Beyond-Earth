@@ -42,7 +42,7 @@ public class OxygenTank : MonoBehaviour
         _oxygenRender.material.color = Color.Lerp(_myColor, _myColor2, GameManager.Instance._tank1OxygenLevel / 100);
 
 
-        if (GameManager.Instance._holdingSecondaryTank && (GameManager.Instance._item == null || !GameManager.Instance._item.CompareTag("Oxigeno")))
+        if (!CharacterController._isHolding && GameManager.Instance._holdingSecondaryTank && (GameManager.Instance._item == null || !GameManager.Instance._item.CompareTag("Oxigeno")))
         {
             GameManager.Instance.timer -= Time.deltaTime;
             if (_inRange)

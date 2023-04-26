@@ -20,7 +20,7 @@ public class CharacterController : MonoBehaviour
 
 
     
-    private bool _isHolding;
+    public static bool _isHolding;
     private float timer, timer2;
     private GameObject _itemTem;
 
@@ -29,36 +29,39 @@ public class CharacterController : MonoBehaviour
 
     void Awake()
     {
-        playerInputActions = new PlayerInputActions();
+        
         timer2 = 0.5f;
         timer = 0f;
         _isHolding = false;
         
         _rb = GetComponent<Rigidbody>();
 
-
+        playerInputActions = new PlayerInputActions();
         playerInputActions.PlayerMov.Interact.started += Interact_started;
         playerInputActions.PlayerMov.Enable();
     }
 
     private void Interact_started(InputAction.CallbackContext context)
     {
-        if (_itemTem != null)
+       // Debug.Log(GameManager.Instance._disable);
+        if (_itemTem != null )
         {
             //COGER
-            if (context.started && !_isHolding && timer <= 0)
-            {
-                _timerRuning = false;
-         
-                GameManager.Instance._item = _itemTem;
-                _isHolding = true;
-                timer2 = 0.5f;
-                GameManager.Instance._speed = 6;
-                GameManager.Instance.HudInteractOff();
-                _timer2Runing = true;
+            
+                if (context.started && !_isHolding && timer <= 0 )
+                {
+                
+                    if (GameManager.Instance._holdingSecondaryTank && _itemTem.CompareTag("Oxigeno2"))
+                    {
+                    }
+                    else
+                    {
+                    StartCoroutine(Prueba());
+                    }
+
             }
             //SOLTAR
-            if (context.started && _isHolding && timer2 <= 0)
+            if (context.started && _isHolding && timer2 <= 0)  
             {
                 _timer2Runing = false;
                 _itemTem = null;
@@ -71,13 +74,32 @@ public class CharacterController : MonoBehaviour
             }
         }
     }
+
+
+
+    IEnumerator Prueba()
+    {
+        yield return null;
+        if (!GameManager.Instance._disable)
+        {
+            _timerRuning = false;
+            GameManager.Instance._item = _itemTem;
+            _isHolding = true;
+            timer2 = 0.5f;
+            GameManager.Instance._speed = 6;
+            GameManager.Instance.HudInteractOff();
+            _timer2Runing = true;
+        }
+        
+     
+    }
     void Update()
     {
 
         _moveInput = playerInputActions.PlayerMov.Movement.ReadValue<Vector2>();
         Rotation();
         
-            if (_isHolding)
+            if (_isHolding )
             {
 
                 GameManager.Instance._item.transform.position = _pickUpSlot.transform.position;
@@ -114,7 +136,19 @@ public class CharacterController : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Pickeable") || ((other.gameObject.CompareTag("Oxigeno") && !GameManager.Instance._holdingMainTank)) && !_isHolding)
+
+
+        if (other.gameObject.layer == 6 && !_isHolding)
+        {
+            _itemTem = other.gameObject;
+            GameManager.Instance.HudInteractOn();
+        }
+        if(other.gameObject.CompareTag("Oxigeno") && !GameManager.Instance._holdingMainTank && !_isHolding)
+        {
+            _itemTem = other.gameObject;
+            GameManager.Instance.HudInteractOn();
+        }
+        if (other.gameObject.CompareTag("Oxigeno2") && !GameManager.Instance._holdingSecondaryTank && !_isHolding)
         {
             _itemTem = other.gameObject;
             GameManager.Instance.HudInteractOn();
@@ -123,10 +157,20 @@ public class CharacterController : MonoBehaviour
 
     }
 
-    
+
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Pickeable") || ((other.CompareTag("Oxigeno") && !GameManager.Instance._holdingMainTank)) && !_isHolding)
+        if (other.gameObject.layer == 6 && !_isHolding)
+        {
+            _itemTem = null;
+            GameManager.Instance.HudInteractOff();
+        }
+        if (other.gameObject.CompareTag("Oxigeno") && !GameManager.Instance._holdingMainTank && !_isHolding)
+        {
+            _itemTem = null;
+            GameManager.Instance.HudInteractOff();
+        }
+        if (other.gameObject.CompareTag("Oxigeno2") && !GameManager.Instance._holdingSecondaryTank && !_isHolding)
         {
             _itemTem = null;
             GameManager.Instance.HudInteractOff();

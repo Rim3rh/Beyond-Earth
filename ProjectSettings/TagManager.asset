@@ -8,6 +8,8 @@ TagManager:
   - OxygenRecharge
   - Oxigeno2
   - Pickeable
+  - Kitchen
+  - Food
   layers:
   - Default
   - TransparentFX
@@ -15,7 +17,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Pickeable
   - 
   - 
   - 

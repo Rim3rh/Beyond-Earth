@@ -60,14 +60,7 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public void AddFood(int value)
-    {
-        GameManager.Instance._playerFood += value;
-    }
-    public void AddOxygen(int value)
-    {
-        GameManager.Instance._playerOxygen += value;
-    }
+   
     private void SetMaxValues()
     {
         //Set food to 100 if food is over 100
