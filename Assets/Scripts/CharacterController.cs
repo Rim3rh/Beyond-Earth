@@ -24,6 +24,9 @@ public class CharacterController : MonoBehaviour
     private float timer, timer2;
     private GameObject _itemTem;
 
+
+    private bool _timer2Runing, _timerRuning;
+
     void Awake()
     {
         playerInputActions = new PlayerInputActions();
@@ -42,47 +45,49 @@ public class CharacterController : MonoBehaviour
     {
         if (_itemTem != null)
         {
-
-            Debug.Log("Entrando1");
-            Debug.Log(_isHolding);
-            Debug.Log(timer);
+            //COGER
             if (context.started && !_isHolding && timer <= 0)
             {
+                _timerRuning = false;
                 Debug.Log("Entrando2");
                 GameManager.Instance._item = _itemTem;
                 _isHolding = true;
                 timer2 = 0.5f;
                 GameManager.Instance._speed = 6;
                 GameManager.Instance.HudInteractOff();
+                _timer2Runing = true;
             }
+            //SOLTAR
             if (context.started && _isHolding && timer2 <= 0)
             {
+                _timer2Runing = false;
                 _itemTem = null;
                 GameManager.Instance._item = _itemTem;
                 _isHolding = false;
                 timer = 0.5f;
                 GameManager.Instance._speed = 10;
                 GameManager.Instance.HudInteractOn();
+                _timerRuning = true;
             }
         }
     }
     void Update()
     {
+
         _moveInput = playerInputActions.PlayerMov.Movement.ReadValue<Vector2>();
         Rotation();
-        if (_itemTem != null)
-        { 
+        
             if (_isHolding)
             {
 
                 GameManager.Instance._item.transform.position = _pickUpSlot.transform.position;
                 timer2 -= Time.deltaTime;
             }   
-            if (!_isHolding)
+            if (_timerRuning)
             {
                 timer -= Time.deltaTime;
             }
-        }      
+            
     }
     private void FixedUpdate()
     {
