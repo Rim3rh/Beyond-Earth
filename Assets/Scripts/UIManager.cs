@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
@@ -10,15 +11,39 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Slider _foodSlider, _healthSlider, _oxygenSlider;
      private Button _addFood, _addOxygen;
 
+    [SerializeField] private TextMeshProUGUI _tetx;
+    [SerializeField] private TextMeshProUGUI _timeLeft;
+    [SerializeField] private TextMeshProUGUI _timer;
+
+
+    private float timer;
    
     void Start()
     {
-        
+        timer = 30f;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if(GameManager.Instance._playerHealth <= 0)
+        {
+            Application.Quit();
+        }
+        timer -= Time.deltaTime;
+        _tetx.text = GameManager.Instance._round.ToString();
+        _timeLeft.text = Mathf.Round(timer).ToString();
+        _timer.text = Mathf.Round(Time.time).ToString();
+
+
+        if (timer <= 0)
+        {
+            GameManager.Instance._round++;
+            timer = 30f;
+        }
+
+
         UpdateSliderValues();
         StatsDrop();
 
@@ -36,7 +61,7 @@ public class UIManager : MonoBehaviour
 
         
         //FOOD
-        GameManager.Instance._playerFood -= Time.deltaTime * 7;
+        GameManager.Instance._playerFood -= Time.deltaTime * 2 * GameManager.Instance._round;
 
         //Oxygen
         GameManager.Instance._playerOxygen = (GameManager.Instance._holdingMainTank) ? GameManager.Instance._tank1OxygenLevel : GameManager.Instance._tank2OxygenLevel;

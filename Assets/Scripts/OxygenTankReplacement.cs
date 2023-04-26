@@ -63,7 +63,7 @@ public class OxygenTankReplacement : MonoBehaviour
         {
             this.transform.position = _oxygenSlot.transform.position;
             //oxygen level goes down
-            GameManager.Instance._tank2OxygenLevel -= Time.deltaTime * 7;
+            GameManager.Instance._tank2OxygenLevel -= Time.deltaTime * 2 * GameManager.Instance._round;
         }
 
 

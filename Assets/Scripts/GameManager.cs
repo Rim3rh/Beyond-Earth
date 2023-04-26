@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     public bool _disable;
     public float _timer;
 
+    public int _round;
+
 
     private void Awake()
     {

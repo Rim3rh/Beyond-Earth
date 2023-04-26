@@ -27,7 +27,7 @@ public class FoodScript : MonoBehaviour
     {
         if (_isCooked && this.gameObject != null)
         {
-            if(context.started)
+            if(context.started && _inRange)
             {
 
                 StartCoroutine(Destroy());
