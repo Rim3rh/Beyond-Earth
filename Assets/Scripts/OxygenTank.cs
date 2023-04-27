@@ -24,6 +24,7 @@ public class OxygenTank : MonoBehaviour
     public MeshRenderer _oxygenRender;
     [SerializeField] Color _myColor;
     [SerializeField] Color _myColor2;
+    private PlayerInputActions _playerInputActions;
 
 
 
@@ -32,41 +33,53 @@ public class OxygenTank : MonoBehaviour
     {
         _oxygenRender = GetComponent<MeshRenderer>();
         _inRange = false;
+
+
+        _playerInputActions = new PlayerInputActions();
+        _playerInputActions.PlayerMov.ChangeTank.started += ChangeTank_started;
+        _playerInputActions.PlayerMov.Enable();
     }
 
-
-    void Update()
+    private void ChangeTank_started(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
-        SetLimits();
-        //Debug.Log(GameManager.Instance._tank1OxygenLevel);
-        _oxygenRender.material.color = Color.Lerp(_myColor, _myColor2, GameManager.Instance._tank1OxygenLevel / 100);
-
-
-        if (!CharacterController._isHolding && GameManager.Instance._holdingSecondaryTank && (GameManager.Instance._item == null || !GameManager.Instance._item.CompareTag("Oxigeno")))
+        if (!CharacterController._isHolding && GameManager.Instance._holdingSecondaryTank)
         {
             GameManager.Instance.timer -= Time.deltaTime;
             if (_inRange)
             {
-                if (Input.GetKeyDown(KeyCode.E) && GameManager.Instance.timer < 0)
+                if (context.started && GameManager.Instance.timer < 0)
                 {
                     _secondaryTank.transform.position = _oxygenDrop.transform.position;
                     GameManager.Instance._holdingMainTank = true;
                     GameManager.Instance._holdingSecondaryTank = false;
                     GameManager.Instance.timer2 = 0.5f;
                 }
-            } 
+            }
+        }
+
+
+
+
+    }
+
+    void Update()
+    {
+        SetLimits();
+       
+        _oxygenRender.material.color = Color.Lerp(_myColor, _myColor2, GameManager.Instance._tank1OxygenLevel / 100);
+
+
+        if (!CharacterController._isHolding && GameManager.Instance._holdingSecondaryTank)
+        {
+            GameManager.Instance.timer -= Time.deltaTime;
         }
 
 
         if (GameManager.Instance._holdingMainTank)
         {
-
-
             this.transform.position = _oxygenSlot.transform.position;
             //oxygen level goes down
             GameManager.Instance._tank1OxygenLevel -= Time.deltaTime * 2 * GameManager.Instance._round;
-
-
         }
 
     }

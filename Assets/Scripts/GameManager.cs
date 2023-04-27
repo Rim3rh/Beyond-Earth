@@ -17,10 +17,13 @@ public class GameManager : MonoBehaviour
     public float _timer;
 
     public int _round;
+    public float _highScore1;
+    public float _time;
 
 
     private void Awake()
     {
+        DontDestroyOnLoad(this.gameObject);
         if (Instance == null)
         {
             Instance = this;
@@ -35,6 +38,10 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        _round = 1;
+
+
+
         _disable = false;
         timer = 0.5f;
         timer2 = 0.5f;

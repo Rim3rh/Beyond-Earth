@@ -6,25 +6,13 @@ using UnityEngine.InputSystem;
 
 public class CharacterController : MonoBehaviour
 {
-
-
-
-    
     private Vector2 _moveInput;
     private Rigidbody _rb;
-    
-
     public GameObject _pickUpSlot;
-
     private PlayerInputActions playerInputActions;
-
-
-    
     public static bool _isHolding;
     private float timer, timer2;
     private GameObject _itemTem;
-
-
     private bool _timer2Runing, _timerRuning;
 
     void Awake()
@@ -95,13 +83,10 @@ public class CharacterController : MonoBehaviour
     }
     void Update()
     {
-
         _moveInput = playerInputActions.PlayerMov.Movement.ReadValue<Vector2>();
         Rotation();
-        
             if (_isHolding )
             {
-
                 GameManager.Instance._item.transform.position = _pickUpSlot.transform.position;
                 timer2 -= Time.deltaTime;
             }   
@@ -109,7 +94,6 @@ public class CharacterController : MonoBehaviour
             {
                 timer -= Time.deltaTime;
             }
-            
     }
     private void FixedUpdate()
     {
@@ -117,27 +101,14 @@ public class CharacterController : MonoBehaviour
     }
     private void Rotation()
     {
-        if (_moveInput.x > 0)
+        if (_moveInput.y != 0 || _moveInput.x != 0)
         {
-            transform.eulerAngles = new Vector3(0, 90, 0);
-        }
-        if (_moveInput.x < 0)
-        {
-            transform.eulerAngles = new Vector3(0, -90, 0);
-        }
-        if (_moveInput.y > 0)
-        {
-            transform.eulerAngles = new Vector3(0, 0, 0);
-        }
-        if (_moveInput.y < 0)
-        {
-            transform.eulerAngles = new Vector3(0, -180, 0);
+            float _targetAngle = Mathf.Atan2(_moveInput.x, _moveInput.y) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0f,_targetAngle,0f);
         }
     }
     private void OnTriggerEnter(Collider other)
     {
-
-
         if (other.gameObject.layer == 6 && !_isHolding)
         {
             _itemTem = other.gameObject;
@@ -153,11 +124,7 @@ public class CharacterController : MonoBehaviour
             _itemTem = other.gameObject;
             GameManager.Instance.HudInteractOn();
         }
-
-
     }
-
-
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.layer == 6 && !_isHolding)

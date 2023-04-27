@@ -15,7 +15,7 @@ public class FadeInFadeOut : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.M))
+        if (GameManager.Instance._playerHealth <= 0)
         {
             int sceneBuildIndex = SceneManager.GetActiveScene().buildIndex;
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OxygenTankReplacement : MonoBehaviour
 {
-
+    //ESTE SCRIP ES PARA COGEER EL SECUNDARIO
     private bool _inRange;
 
 
@@ -17,15 +17,40 @@ public class OxygenTankReplacement : MonoBehaviour
     public MeshRenderer _oxygenRender;
     [SerializeField] Color _myColor;
     [SerializeField] Color _myColor2;
+    private PlayerInputActions _playerInputActions;
 
 
     void Start()
     {
+        _playerInputActions = new PlayerInputActions();
+        _playerInputActions.PlayerMov.ChangeTank.started += ChangeTank_started;
+        _playerInputActions.PlayerMov.Enable();
+
+
+
         _oxygenRender = GetComponent<MeshRenderer>();
         _inRange = false;
     }
 
-    //ESTE SCRIP ES PARA COGEER EL SECUNDARIO
+    private void ChangeTank_started(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    {
+        if (!CharacterController._isHolding && GameManager.Instance._holdingMainTank)
+        {
+            GameManager.Instance.timer2 -= Time.deltaTime;
+            if (_inRange)
+            {
+                if (context.started && GameManager.Instance.timer2 < 0)
+                {
+                    _mainTank.transform.position = _oxygenDrop.transform.position;
+                    GameManager.Instance._holdingSecondaryTank = true;
+                    GameManager.Instance._holdingMainTank = false;
+                    GameManager.Instance.timer = 0.5f;
+                }
+            }
+        }
+    }
+
+    
 
 
 
@@ -37,26 +62,9 @@ public class OxygenTankReplacement : MonoBehaviour
         _oxygenRender.material.color = Color.Lerp(_myColor, _myColor2, GameManager.Instance._tank2OxygenLevel / 100);
            //Lo explico xq al igual en otro momento ns q he hecho, le digo aqui q puede cambiar de tanke, si el item es igual a null o si no es igual a oxigeno, ya que
            //si lo fuese sinificaria q lo esta sujetando
-        if (GameManager.Instance._holdingMainTank &&  (GameManager.Instance._item == null || !GameManager.Instance._item.CompareTag("Oxigeno")))
+        if (!CharacterController._isHolding && GameManager.Instance._holdingMainTank)
         {
-            
-
             GameManager.Instance.timer2 -= Time.deltaTime;
-            if (_inRange)
-            {
-               
-
-                if (Input.GetKeyDown(KeyCode.E) && GameManager.Instance.timer2 < 0)
-                {
-                    _mainTank.transform.position = _oxygenDrop.transform.position;
-                    GameManager.Instance._holdingSecondaryTank = true;
-                    GameManager.Instance._holdingMainTank = false;
-                    GameManager.Instance.timer = 0.5f;
-                    
-                }
-            }
-
-
         }
 
         if (GameManager.Instance._holdingSecondaryTank)

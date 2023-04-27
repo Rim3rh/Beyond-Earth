@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -29,11 +30,17 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance._playerHealth <= 0) SceneManager.LoadScene(1);
+            
       
-        if (GameManager.Instance._playerHealth <= 0)
-        {
-            Application.Quit();
-        }
+        
+
+
+
+
+
+
+
         timer -= Time.deltaTime;
         
         _tetx.text = GameManager.Instance._round.ToString();
