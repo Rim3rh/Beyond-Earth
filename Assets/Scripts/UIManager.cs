@@ -17,26 +17,28 @@ public class UIManager : MonoBehaviour
 
 
     private float timer;
+    
+
    
     void Start()
     {
         timer = 30f;
+ 
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        if(GameManager.Instance._playerHealth <= 0)
+      
+        if (GameManager.Instance._playerHealth <= 0)
         {
             Application.Quit();
         }
         timer -= Time.deltaTime;
+        
         _tetx.text = GameManager.Instance._round.ToString();
         _timeLeft.text = Mathf.Round(timer).ToString();
         _timer.text = Mathf.Round(Time.time).ToString();
-
-
         if (timer <= 0)
         {
             GameManager.Instance._round++;

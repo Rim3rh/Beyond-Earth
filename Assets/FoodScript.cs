@@ -7,12 +7,15 @@ public class FoodScript : MonoBehaviour
     public MeshRenderer _foodRender;
     [SerializeField] Color _myColor;
     [SerializeField] Color _myColor2;
+    [SerializeField] ParticleSystem _kek;
 
     private float _cookingState;
     private PlayerInputActions playerInputActions;
     private bool _inRange;
     public bool _isCooked;
     private bool _cooking;
+    int cont = 0;
+
     void Start()
     {
         _cookingState = 0;
@@ -42,11 +45,24 @@ public class FoodScript : MonoBehaviour
     {
         _foodRender.material.color = Color.Lerp(_myColor, _myColor2, _cookingState / 100);
 
-        if (_cookingState >= 100) _isCooked = true;
-            if (_cooking)
+        if (_cookingState >= 100)
         {
-            _cookingState += Time.deltaTime * 10;
+            _isCooked = true;
+            
+            if (cont < 1)
+            {
+                _kek.Play();
+                cont++;
+            }
         }
+        
+
+            if (_cooking)
+            {
+
+                _cookingState += Time.deltaTime * 10;
+
+            }
 
 
        
