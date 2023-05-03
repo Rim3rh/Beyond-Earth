@@ -9,21 +9,18 @@ public class UIManager : MonoBehaviour
 {
 
    
-    [SerializeField] private Slider _foodSlider, _healthSlider, _oxygenSlider;
+    //[SerializeField] private Slider _foodSlider, _healthSlider, _oxygenSlider;
      private Button _addFood, _addOxygen;
 
-    [SerializeField] private TextMeshProUGUI _tetx;
-    [SerializeField] private TextMeshProUGUI _timeLeft;
-    [SerializeField] private TextMeshProUGUI _timer;
+    [SerializeField] private Image _foodSlider, _healthSlider, _oxygenSlider;
 
 
-    private float timer;
-    
+
 
    
     void Start()
     {
-        timer = 30f;
+       
  
     }
 
@@ -41,16 +38,7 @@ public class UIManager : MonoBehaviour
 
 
 
-        timer -= Time.deltaTime;
-        
-        _tetx.text = GameManager.Instance._round.ToString();
-        _timeLeft.text = Mathf.Round(timer).ToString();
-        _timer.text = Mathf.Round(Time.time).ToString();
-        if (timer <= 0)
-        {
-            GameManager.Instance._round++;
-            timer = 30f;
-        }
+       
 
 
         UpdateSliderValues();
@@ -59,9 +47,10 @@ public class UIManager : MonoBehaviour
     }
     private void UpdateSliderValues()
     {
-        _foodSlider.value = GameManager.Instance._playerFood;
-        _healthSlider.value = GameManager.Instance._playerHealth;
-        _oxygenSlider.value = GameManager.Instance._playerOxygen;
+        Debug.Log(_foodSlider.fillAmount = GameManager.Instance._playerFood / 100);
+        _foodSlider.fillAmount = GameManager.Instance._playerFood / 100;
+        _healthSlider.fillAmount = GameManager.Instance._playerHealth / 100;
+        _oxygenSlider.fillAmount = GameManager.Instance._playerOxygen / 100;
     }
 
     private void StatsDrop()
