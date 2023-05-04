@@ -13,7 +13,8 @@ public class CharacterController : MonoBehaviour
     public static bool _isHolding;
     private float timer, timer2;
     private GameObject _itemTem;
-    private bool _timer2Runing, _timerRuning;
+    private bool  _timerRuning;
+    [SerializeField] private Transform _camara;
 
     void Awake()
     {
@@ -51,12 +52,12 @@ public class CharacterController : MonoBehaviour
             //SOLTAR
             if (context.started && _isHolding && timer2 <= 0)  
             {
-                _timer2Runing = false;
+                
                 _itemTem = null;
                 GameManager.Instance._item = _itemTem;
                 _isHolding = false;
                 timer = 0.5f;
-                GameManager.Instance._speed = 10;
+                GameManager.Instance._speed = 6;
                 GameManager.Instance.HudInteractOn();
                 _timerRuning = true;
             }
@@ -76,7 +77,7 @@ public class CharacterController : MonoBehaviour
             timer2 = 0.5f;
             GameManager.Instance._speed = 6;
             GameManager.Instance.HudInteractOff();
-            _timer2Runing = true;
+            
         }
         
      
@@ -97,14 +98,16 @@ public class CharacterController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        _rb.velocity = new Vector3(_moveInput.x * GameManager.Instance._speed, 0, _moveInput.y * GameManager.Instance._speed);
+        _rb.velocity = new Vector3(_moveInput.x * GameManager.Instance._speed, _rb.velocity.y, _moveInput.y * GameManager.Instance._speed);
     }
     private void Rotation()
     {
         if (_moveInput.y != 0 || _moveInput.x != 0)
         {
             float _targetAngle = Mathf.Atan2(_moveInput.x, _moveInput.y) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0f,_targetAngle,0f);
+
+           // Debug.Log(_targetAngle);
+            transform.rotation = Quaternion.Euler(0f, _targetAngle, 0f);
         }
     }
     private void OnTriggerEnter(Collider other)

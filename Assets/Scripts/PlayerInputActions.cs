@@ -53,6 +53,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CameraRotation"",
+                    ""type"": ""Value"",
+                    ""id"": ""388aca16-b574-467a-a51d-ee51a33ea8d6"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -209,6 +218,116 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""ChangeTank"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""8f7a7109-8405-4217-b6c4-0bac7968d9e7"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraRotation"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""44038405-a373-4cbb-859d-62f0e4089c8a"",
+                    ""path"": ""<Mouse>/delta/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraRotation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""0a9b62a9-095f-445b-9b02-46f7fc032568"",
+                    ""path"": ""<Mouse>/delta/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraRotation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""69aaf3fc-82af-4ca7-8e05-b810eb15597d"",
+                    ""path"": ""<Mouse>/delta/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraRotation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""99fac3d1-9e8b-48d6-bbb2-b7ef406955a4"",
+                    ""path"": ""<Mouse>/delta/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraRotation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""2D VectorController"",
+                    ""id"": ""c57750f5-9177-46a9-9c34-f3e878d6be76"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraRotation"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""145cfe96-2812-45ad-bc1c-97149402e862"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraRotation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""a4ffbe02-fded-4f2a-8bb7-519423831da5"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraRotation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""6122ed81-d308-4b33-ae57-13f96cdf4f3c"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraRotation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""1564de8f-8130-414c-97bf-47edf1db9383"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraRotation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -248,6 +367,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_PlayerMov_Interact = m_PlayerMov.FindAction("Interact", throwIfNotFound: true);
         m_PlayerMov_Movement = m_PlayerMov.FindAction("Movement", throwIfNotFound: true);
         m_PlayerMov_ChangeTank = m_PlayerMov.FindAction("ChangeTank", throwIfNotFound: true);
+        m_PlayerMov_CameraRotation = m_PlayerMov.FindAction("CameraRotation", throwIfNotFound: true);
         // PauseMenu
         m_PauseMenu = asset.FindActionMap("PauseMenu", throwIfNotFound: true);
         m_PauseMenu_Newaction = m_PauseMenu.FindAction("New action", throwIfNotFound: true);
@@ -315,6 +435,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMov_Interact;
     private readonly InputAction m_PlayerMov_Movement;
     private readonly InputAction m_PlayerMov_ChangeTank;
+    private readonly InputAction m_PlayerMov_CameraRotation;
     public struct PlayerMovActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -322,6 +443,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Interact => m_Wrapper.m_PlayerMov_Interact;
         public InputAction @Movement => m_Wrapper.m_PlayerMov_Movement;
         public InputAction @ChangeTank => m_Wrapper.m_PlayerMov_ChangeTank;
+        public InputAction @CameraRotation => m_Wrapper.m_PlayerMov_CameraRotation;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMov; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -340,6 +462,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @ChangeTank.started += instance.OnChangeTank;
             @ChangeTank.performed += instance.OnChangeTank;
             @ChangeTank.canceled += instance.OnChangeTank;
+            @CameraRotation.started += instance.OnCameraRotation;
+            @CameraRotation.performed += instance.OnCameraRotation;
+            @CameraRotation.canceled += instance.OnCameraRotation;
         }
 
         private void UnregisterCallbacks(IPlayerMovActions instance)
@@ -353,6 +478,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @ChangeTank.started -= instance.OnChangeTank;
             @ChangeTank.performed -= instance.OnChangeTank;
             @ChangeTank.canceled -= instance.OnChangeTank;
+            @CameraRotation.started -= instance.OnCameraRotation;
+            @CameraRotation.performed -= instance.OnCameraRotation;
+            @CameraRotation.canceled -= instance.OnCameraRotation;
         }
 
         public void RemoveCallbacks(IPlayerMovActions instance)
@@ -421,6 +549,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnMovement(InputAction.CallbackContext context);
         void OnChangeTank(InputAction.CallbackContext context);
+        void OnCameraRotation(InputAction.CallbackContext context);
     }
     public interface IPauseMenuActions
     {

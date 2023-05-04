@@ -47,7 +47,7 @@ public class UIManager : MonoBehaviour
     }
     private void UpdateSliderValues()
     {
-        Debug.Log(_foodSlider.fillAmount = GameManager.Instance._playerFood / 100);
+       // Debug.Log(_foodSlider.fillAmount = GameManager.Instance._playerFood / 100);
         _foodSlider.fillAmount = GameManager.Instance._playerFood / 100;
         _healthSlider.fillAmount = GameManager.Instance._playerHealth / 100;
         _oxygenSlider.fillAmount = GameManager.Instance._playerOxygen / 100;
