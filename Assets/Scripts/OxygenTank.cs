@@ -40,7 +40,7 @@ public class OxygenTank : MonoBehaviour
     void Update()
     {
         SetLimits();
-        _oxygenRender.material.color = Color.Lerp(_myColor, _myColor2, GameManager.Instance._tank1OxygenLevel / 100);
+       // _oxygenRender.material.color = Color.Lerp(_myColor, _myColor2, GameManager.Instance._tank1OxygenLevel / 100);
         if (!PickUpScript._isHolding && GameManager.Instance._holdingSecondaryTank)
         {
             GameManager.Instance.timer -= Time.deltaTime;
@@ -48,6 +48,7 @@ public class OxygenTank : MonoBehaviour
         if (GameManager.Instance._holdingMainTank)
         {
             this.transform.position = _oxygenSlot.transform.position;
+            this.transform.rotation = _oxygenSlot.transform.rotation;
             //oxygen level goes down
             GameManager.Instance._tank1OxygenLevel -= Time.deltaTime * 2;
         }

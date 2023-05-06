@@ -59,7 +59,7 @@ public class OxygenTankReplacement : MonoBehaviour
         //Debug.Log(GameManager.Instance._item);
         SetLimits();
 
-        _oxygenRender.material.color = Color.Lerp(_myColor, _myColor2, GameManager.Instance._tank2OxygenLevel / 100);
+        //_oxygenRender.material.color = Color.Lerp(_myColor, _myColor2, GameManager.Instance._tank2OxygenLevel / 100);
            //Lo explico xq al igual en otro momento ns q he hecho, le digo aqui q puede cambiar de tanke, si el item es igual a null o si no es igual a oxigeno, ya que
            //si lo fuese sinificaria q lo esta sujetando
         if (!PickUpScript._isHolding && GameManager.Instance._holdingMainTank)
@@ -70,6 +70,7 @@ public class OxygenTankReplacement : MonoBehaviour
         if (GameManager.Instance._holdingSecondaryTank)
         {
             this.transform.position = _oxygenSlot.transform.position;
+            this.transform.rotation = _oxygenSlot.transform.rotation;
             //oxygen level goes down
             GameManager.Instance._tank2OxygenLevel -= Time.deltaTime * 2;
         }
