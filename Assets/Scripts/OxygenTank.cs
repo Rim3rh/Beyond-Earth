@@ -6,35 +6,14 @@ public class OxygenTank : MonoBehaviour
 {
 
     private bool _inRange;
-   
-   
-
-
-
-
-
-
-
-    public GameObject _oxygenSlot;
-    public GameObject _oxygenDrop;
-    public GameObject _secondaryTank;
-
-
-
+    public GameObject _oxygenSlot, _secondaryTank, _oxygenDrop;
     public MeshRenderer _oxygenRender;
-    [SerializeField] Color _myColor;
-    [SerializeField] Color _myColor2;
+    [SerializeField] Color _myColor, _myColor2;
     private PlayerInputActions _playerInputActions;
-
-
-
-
     void Start()
     {
         _oxygenRender = GetComponent<MeshRenderer>();
         _inRange = false;
-
-
         _playerInputActions = new PlayerInputActions();
         _playerInputActions.PlayerMov.ChangeTank.started += ChangeTank_started;
         _playerInputActions.PlayerMov.Enable();
@@ -42,7 +21,7 @@ public class OxygenTank : MonoBehaviour
 
     private void ChangeTank_started(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
-        if (!CharacterController._isHolding && GameManager.Instance._holdingSecondaryTank)
+        if (!PickUpScript._isHolding && GameManager.Instance._holdingSecondaryTank)
         {
             GameManager.Instance.timer -= Time.deltaTime;
             if (_inRange)
@@ -56,50 +35,34 @@ public class OxygenTank : MonoBehaviour
                 }
             }
         }
-
-
-
-
     }
 
     void Update()
     {
         SetLimits();
-       
         _oxygenRender.material.color = Color.Lerp(_myColor, _myColor2, GameManager.Instance._tank1OxygenLevel / 100);
-
-
-        if (!CharacterController._isHolding && GameManager.Instance._holdingSecondaryTank)
+        if (!PickUpScript._isHolding && GameManager.Instance._holdingSecondaryTank)
         {
             GameManager.Instance.timer -= Time.deltaTime;
         }
-
-
         if (GameManager.Instance._holdingMainTank)
         {
             this.transform.position = _oxygenSlot.transform.position;
             //oxygen level goes down
-            GameManager.Instance._tank1OxygenLevel -= Time.deltaTime * 2 * GameManager.Instance._round;
+            GameManager.Instance._tank1OxygenLevel -= Time.deltaTime * 2;
         }
-
     }
                    
     private void SetLimits()
     {
         GameManager.Instance._tank1OxygenLevel = (GameManager.Instance._tank1OxygenLevel >= 100) ? 100 : GameManager.Instance._tank1OxygenLevel;
-
         GameManager.Instance._tank1OxygenLevel = (GameManager.Instance._tank1OxygenLevel <= 0) ? 0 : GameManager.Instance._tank1OxygenLevel;
     }
-
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             _inRange = true;
-            
-
-
         } 
     }
     private void OnTriggerExit(Collider other)

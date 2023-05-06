@@ -15,10 +15,7 @@ public class GameManager : MonoBehaviour
     public Animator fadeAnim;
     public bool _disable;
     public float _timer;
-
-    public int _round;
-    public float _highScore1;
-    public float _time;
+    public int _easterEggCounter;
 
 
     private void Awake()
@@ -38,10 +35,6 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        _round = 1;
-
-
-
         _disable = false;
         timer = 0.5f;
         timer2 = 0.5f;
