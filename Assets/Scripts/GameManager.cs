@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public GameObject _interactCanvas;
     public int _speed;
     public bool _holdingMainTank;
+    public bool _holdingShovel;
     public bool _holdingSecondaryTank;
     public GameObject _item;
     public Animator fadeAnim;
@@ -46,6 +47,7 @@ public class GameManager : MonoBehaviour
         _playerOxygen = 100;
         _holdingSecondaryTank = false;
         _holdingMainTank = true;
+        _holdingShovel = false;
 
         _interactCanvas.SetActive(false);
     }
