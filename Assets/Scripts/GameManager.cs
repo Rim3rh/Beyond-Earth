@@ -7,10 +7,12 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public float _playerHealth, _playerFood, _playerOxygen, _tank1OxygenLevel, _tank2OxygenLevel;
     public float timer, timer2;
-    public GameObject _interactCanvas;
+    
     public int _speed;
     public bool _holdingMainTank;
-    public bool _holdingShovel;
+
+    public bool _holdingShovel, _insideDiggingHole;
+
     public bool _holdingSecondaryTank;
     public GameObject _item;
     public Animator fadeAnim;
@@ -49,7 +51,7 @@ public class GameManager : MonoBehaviour
         _holdingMainTank = true;
         _holdingShovel = false;
 
-        _interactCanvas.SetActive(false);
+        
     }
 
 
@@ -57,15 +59,7 @@ public class GameManager : MonoBehaviour
 
 
 
-    public void HudInteractOn()
-    {
-        _interactCanvas.SetActive(true);
-    }
-
-    public void HudInteractOff()
-    {
-        _interactCanvas.SetActive(false);
-    }
+    
 
     public void AddFood(int value)
     {

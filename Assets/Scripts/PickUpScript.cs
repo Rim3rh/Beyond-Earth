@@ -12,6 +12,8 @@ public class PickUpScript : MonoBehaviour
     private GameObject _itemTem;
     private PlayerInputActions playerInputActions;
 
+    public GameObject _UiManager;
+
     void Start()
     {
         timer2 = 0.5f;
@@ -27,7 +29,7 @@ public class PickUpScript : MonoBehaviour
         if (_itemTem != null)
         {
             //Grab
-            if (context.started && !_isHolding && timer <= 0)
+            if (!_isHolding && timer <= 0)
             {
                 if (GameManager.Instance._holdingSecondaryTank && _itemTem.CompareTag("Oxigeno2"))
                 {
@@ -38,14 +40,15 @@ public class PickUpScript : MonoBehaviour
                 }
             }
             //Drop
-            if (context.started && _isHolding && timer2 <= 0)
+            if (_isHolding && timer2 <= 0 && !GameManager.Instance._insideDiggingHole)
             {
                 _itemTem = null;
                 GameManager.Instance._item = _itemTem;
                 _isHolding = false;
                 timer = 0.5f;
                 GameManager.Instance._speed = 6;
-                GameManager.Instance.HudInteractOn();
+               
+                _UiManager.GetComponent<UIManager>().HudInteractOn();
                 _timerRuning = true;
             }
         }
@@ -60,7 +63,7 @@ public class PickUpScript : MonoBehaviour
             _isHolding = true;
             timer2 = 0.5f;
             GameManager.Instance._speed = 6;
-            GameManager.Instance.HudInteractOff();
+            _UiManager.GetComponent<UIManager>().HudInteractOff();
         }
     }
     void Update()
@@ -77,38 +80,83 @@ public class PickUpScript : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        HudsEnter(other);
         if (other.gameObject.layer == 6 && !_isHolding)
         {
             _itemTem = other.gameObject;
-            GameManager.Instance.HudInteractOn();
         }
         if (other.gameObject.CompareTag("Oxigeno") && !GameManager.Instance._holdingMainTank && !_isHolding)
         {
             _itemTem = other.gameObject;
-            GameManager.Instance.HudInteractOn();
         }
         if (other.gameObject.CompareTag("Oxigeno2") && !GameManager.Instance._holdingSecondaryTank && !_isHolding)
         {
             _itemTem = other.gameObject;
-            GameManager.Instance.HudInteractOn();
         }
     }
     private void OnTriggerExit(Collider other)
     {
+        HudsExit(other);
         if (other.gameObject.layer == 6 && !_isHolding)
         {
             _itemTem = null;
-            GameManager.Instance.HudInteractOff();
         }
         if (other.gameObject.CompareTag("Oxigeno") && !GameManager.Instance._holdingMainTank && !_isHolding)
         {
             _itemTem = null;
-            GameManager.Instance.HudInteractOff();
         }
         if (other.gameObject.CompareTag("Oxigeno2") && !GameManager.Instance._holdingSecondaryTank && !_isHolding)
         {
             _itemTem = null;
-            GameManager.Instance.HudInteractOff();
+        }
+
+
+
+
+    }
+
+    
+    private void HudsEnter(Collider other)
+    {
+        if (other.gameObject.layer == 6 && !_isHolding)
+        {
+            _UiManager.GetComponent<UIManager>().HudInteractOn();
+        }
+        if (other.gameObject.CompareTag("Oxigeno") && !GameManager.Instance._holdingMainTank && !_isHolding)
+        {
+            _UiManager.GetComponent<UIManager>().HudInteractOn();
+        }
+        if (other.gameObject.CompareTag("Oxigeno2") && !GameManager.Instance._holdingSecondaryTank && !_isHolding)
+        {
+            _UiManager.GetComponent<UIManager>().HudInteractOn();
+        }
+        //WHEN U ENTER THE ROCKET
+        if (other.gameObject.CompareTag("Rocket"))
+        {
+            _UiManager.GetComponent<UIManager>().HudBuildtOn();
         }
     }
+    private void HudsExit(Collider other)
+    {
+        //WHEN U ENTER THE ROCKET
+        if (other.gameObject.CompareTag("Rocket"))
+        {
+            _UiManager.GetComponent<UIManager>().HudBuildtOff();
+        }
+
+
+        if (other.gameObject.layer == 6 && !_isHolding)
+        {
+            _UiManager.GetComponent<UIManager>().HudInteractOff();
+        }
+        if (other.gameObject.CompareTag("Oxigeno") && !GameManager.Instance._holdingMainTank && !_isHolding)
+        {
+            _UiManager.GetComponent<UIManager>().HudInteractOff();
+        }
+        if (other.gameObject.CompareTag("Oxigeno2") && !GameManager.Instance._holdingSecondaryTank && !_isHolding)
+        {
+            _UiManager.GetComponent<UIManager>().HudInteractOff();
+        }
+    }
+    
 }

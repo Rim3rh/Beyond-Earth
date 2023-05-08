@@ -10,6 +10,7 @@ TagManager:
   - Pickeable
   - Kitchen
   - Food
+  - Rocket
   layers:
   - Default
   - TransparentFX

@@ -7,9 +7,13 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
+   // public static UIManager Instance { get; private set; }
+
     [SerializeField] private Image _foodSlider, _healthSlider, _oxygenSlider;
+    public GameObject _interactCanvas, _digCanvas, _buildCanvas, _swapCanvas, _needPartsCanvas;
     void Update()
     {
+       
         if (GameManager.Instance._playerHealth <= 0) SceneManager.LoadScene(1);
         UpdateSliderValues();
         StatsDrop();
@@ -64,6 +68,37 @@ public class UIManager : MonoBehaviour
         GameManager.Instance._playerOxygen = (GameManager.Instance._playerOxygen >= 100) ? 100 : GameManager.Instance._playerOxygen;
         //Set Oxygen to 0 if Oxygen is under 0
         GameManager.Instance._playerOxygen = (GameManager.Instance._playerOxygen <= 0) ? 0 : GameManager.Instance._playerOxygen;
+    }
+
+
+
+
+    public void HudInteractOn()
+    {
+        _interactCanvas.SetActive(true);
+    }
+
+    public void HudInteractOff()
+    {
+        _interactCanvas.SetActive(false);
+    }
+    public void HudBuildtOn()
+    {
+        _buildCanvas.SetActive(true);
+    }
+
+    public void HudBuildtOff()
+    {  
+        _buildCanvas.SetActive(false);
+    }
+    public void HudDigOn()
+    {
+        _digCanvas.SetActive(true);
+    }
+
+    public void HudDigOff()
+    {
+        _digCanvas.SetActive(false);
     }
 
 }
