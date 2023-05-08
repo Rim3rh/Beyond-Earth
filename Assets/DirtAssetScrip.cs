@@ -20,7 +20,7 @@ public class DirtAssetScrip : MonoBehaviour
 
         if(GameManager.Instance._insideDiggingHole && GameManager.Instance._holdingShovel)
         {
-            Instantiate(_obj, new Vector3(0, 4, 0), Quaternion.Euler(-90, 0, 0));
+            Instantiate(_obj,  this.transform.position + new Vector3(0, 4, 0), Quaternion.Euler(-90, 0, 0));
             playerInputActions.PlayerMov.Disable();
             GameManager.Instance._insideDiggingHole = false;
             Destroy(this.gameObject);
