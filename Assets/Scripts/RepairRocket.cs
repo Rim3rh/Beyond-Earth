@@ -14,7 +14,7 @@ public class RepairRocket : MonoBehaviour
     public bool _repairPartBool1, _repairPartBool2, _repairPartBool3;
     public bool _fixedPart1, _fixedPart2, _fixedPart3;
 
-    int contador;
+    int contador, contador2, contador3;
    // public GameObject _cam;
 
     void Awake()
@@ -57,7 +57,7 @@ public class RepairRocket : MonoBehaviour
             
             if (contador <= 1)
             {
-                StartCoroutine(ChangeCam());
+                StartCoroutine(ChangeCam(_repairPart1, new Vector3(12.143f, 5.08f, 49.591f), new Vector3(-90, 0, 50)));
                 contador++;
             }
            
@@ -67,27 +67,35 @@ public class RepairRocket : MonoBehaviour
         }
         if (_fixedPart2 && !PickUpScript._isHolding)
         {
-            Debug.Log("HOLA");
-            _repairPart2.transform.position = new Vector3(10.68563f, 4.42374f, 47.02574f);
-            _repairPart2.transform.rotation = Quaternion.Euler(-90, 0, 55.385f);
+
+            if(contador2 <= 1)
+            {
+                StartCoroutine(ChangeCam(_repairPart2, new Vector3(10.68563f, 4.42374f, 47.02574f), new Vector3(-90, 0, 55.385f)));
+                contador2++;
+            }
+            
         }
         if (_fixedPart3 && !PickUpScript._isHolding)
         {
-
+            if (contador3 <= 1)
+            {
+                StartCoroutine(ChangeCam(_repairPart3, new Vector3(10.68563f, 4.42374f, 47.02574f), new Vector3(-90, 0, 55.385f)));
+                contador3++;
+            }
         }
 
 
     }
 
-    private IEnumerator ChangeCam()
+    private IEnumerator ChangeCam(GameObject name, Vector3 pos, Vector3 rot)
     {
         _cam.Priority = 40;
 
         yield return new WaitForSeconds(1.5f);
         _particle.Play();
         yield return new WaitForSeconds(0.75f);
-        _repairPart1.transform.position = new Vector3(12.143f, 5.08f, 49.591f);
-        _repairPart1.transform.rotation = Quaternion.Euler(-90, 0, 50);
+        name.transform.position = pos;
+        name.transform.rotation = Quaternion.Euler(rot);
         yield return new WaitForSeconds(1.5f);
         _cam.Priority = 10;
     }

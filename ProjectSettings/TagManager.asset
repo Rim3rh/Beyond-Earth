@@ -15,6 +15,7 @@ TagManager:
   - RepairPart2
   - RepairPart3
   - Flag
+  - SalirCasa
   layers:
   - Default
   - TransparentFX
