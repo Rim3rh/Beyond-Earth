@@ -60,6 +60,8 @@ public class CharacterController : MonoBehaviour
     private void Movement()
     {
         _moveDir = orientation.forward * _moveInput.y + orientation.right * _moveInput.x;
+
+
       
         _rb.velocity = _moveDir.normalized * GameManager.Instance._speed ;
         

@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
 
     public bool _canMove;
 
+    public bool _insideHouse;
+
 
     private void Awake()
     {
@@ -41,6 +43,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        _insideHouse = true;
         _canMove = true;
         _gear = false;
         _disable = false;
