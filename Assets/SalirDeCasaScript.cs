@@ -20,8 +20,18 @@ public class SalirDeCasaScript : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-
+            StartCoroutine(SalirCasa());
         }
     }
+
+    private IEnumerator SalirCasa()
+    {
+
+        yield return new WaitForSeconds(1);
+
+    }
+
+
+
 
 }
