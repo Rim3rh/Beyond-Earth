@@ -79,7 +79,7 @@ public class RepairRocket : MonoBehaviour
         {
             if (contador3 <= 1)
             {
-                StartCoroutine(ChangeCam(_repairPart3, new Vector3(10.68563f, 4.42374f, 47.02574f), new Vector3(-90, 0, 55.385f)));
+                StartCoroutine(ChangeCam(_repairPart3, new Vector3(11.723f, 13.27719f, 47.584f), new Vector3(-90, 0, 0f)));
                 contador3++;
             }
         }
@@ -89,6 +89,7 @@ public class RepairRocket : MonoBehaviour
 
     private IEnumerator ChangeCam(GameObject name, Vector3 pos, Vector3 rot)
     {
+        GameManager.Instance._canMove = false;
         _cam.Priority = 40;
 
         yield return new WaitForSeconds(1.5f);
@@ -98,6 +99,7 @@ public class RepairRocket : MonoBehaviour
         name.transform.rotation = Quaternion.Euler(rot);
         yield return new WaitForSeconds(1.5f);
         _cam.Priority = 10;
+        GameManager.Instance._canMove = true;
     }
 
 

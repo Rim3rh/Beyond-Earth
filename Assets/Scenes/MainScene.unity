@@ -1190,7 +1190,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 272377220}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 2.2724428, y: 1.9375528, z: 2.82818}
@@ -4639,6 +4639,37 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1919267e5060a964f864140c8f751d37, type: 3}
+--- !u!1 &994755353
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 994755354}
+  m_Layer: 0
+  m_Name: SALIDA
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &994755354
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 994755353}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: -0.488, z: 4.83}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2041257184}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1002802199
 GameObject:
   m_ObjectHideFlags: 0
@@ -6704,7 +6735,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1446769555}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.32, y: 0.73, z: -0.26}
+  m_LocalPosition: {x: 0.32, y: 0.73, z: -0.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6803,8 +6834,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.0474176, y: 3.049834, z: 1.6714442}
-  m_Center: {x: 0.051986217, y: -0.0140247345, z: 0.33572215}
+  m_Size: {x: 3.7021027, y: 3.8349822, z: 1.6714442}
+  m_Center: {x: 0.2246437, y: 0.37854946, z: 0.33572215}
 --- !u!4 &1454429649
 Transform:
   m_ObjectHideFlags: 0
@@ -7277,6 +7308,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1565567169}
   m_CullTransparentMesh: 1
+--- !u!1 &1607967484
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1607967487}
+  - component: {fileID: 1607967486}
+  - component: {fileID: 1607967485}
+  m_Layer: 0
+  m_Name: EntrarALaCasa
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1607967485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1607967484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c31702a1e36d854090573995b42ef72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fade: {fileID: 686750776}
+  _player: {fileID: 919132149106440030}
+  _houseEnter: {fileID: 1717069204}
+--- !u!65 &1607967486
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1607967484}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.264042, y: 2.5055723, z: 1.3259325}
+  m_Center: {x: -0.14568424, y: 0.18743372, z: 0.1629654}
+--- !u!4 &1607967487
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1607967484}
+  m_LocalRotation: {x: -0, y: -0.24435323, z: -0, w: 0.96968627}
+  m_LocalPosition: {x: 7.19, y: 2.3068852, z: 33.12}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1717069204}
+  m_Father: {fileID: 0}
+  m_RootOrder: 31
+  m_LocalEulerAnglesHint: {x: 0, y: -28.287, z: 0}
 --- !u!1001 &1615220016
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7452,6 +7545,37 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.1875, y: 2.1810849, z: 1.9899256}
   m_Center: {x: -0.11487484, y: -0.11183061, z: 0.49496305}
+--- !u!1 &1717069203
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1717069204}
+  m_Layer: 0
+  m_Name: SALIDA
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1717069204
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1717069203}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.488, z: -5.11}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1607967487}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1804279629 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1919267e5060a964f864140c8f751d37,
@@ -8039,7 +8163,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1881804702}
-  m_LocalRotation: {x: 0.20159721, y: -0.00000005673292, z: 0.000000016594498, w: 0.9794686}
+  m_LocalRotation: {x: 0.20159726, y: -0.00000005673292, z: 0.000000016593447, w: 0.9794686}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8227,7 +8351,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 9099f39c7614d1c4c9395bf811416d20,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.88
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9099f39c7614d1c4c9395bf811416d20,
         type: 3}
@@ -8844,6 +8968,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 762ddbd99e835e146a2e0f4aefc15458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _fade: {fileID: 686750776}
+  _player: {fileID: 919132149106440030}
+  _houseExit: {fileID: 994755354}
 --- !u!65 &2041257183
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8868,7 +8995,8 @@ Transform:
   m_LocalPosition: {x: 8.307, y: 2.3068852, z: 31.046}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 994755354}
   m_Father: {fileID: 0}
   m_RootOrder: 30
   m_LocalEulerAnglesHint: {x: 0, y: -28.287, z: 0}
