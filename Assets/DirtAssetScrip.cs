@@ -7,20 +7,22 @@ public class DirtAssetScrip : MonoBehaviour
     private PlayerInputActions playerInputActions;
 
     public GameObject _obj;
+    private bool _inRange;
 
     void Start()
     {
         playerInputActions = new PlayerInputActions();
         playerInputActions.PlayerMov.Enable();
         playerInputActions.PlayerMov.Interact.started += Interact_started;
+        _inRange = false;
     }
 
     private void Interact_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
 
-        if(GameManager.Instance._insideDiggingHole && GameManager.Instance._holdingShovel)
+        if(GameManager.Instance._insideDiggingHole && GameManager.Instance._holdingShovel && _inRange)
         {
-            Instantiate(_obj,  this.transform.position + new Vector3(0, 4, 0), Quaternion.Euler(-90, 0, 0));
+            Instantiate(_obj,  this.transform.position + new Vector3(0, 0, 0), Quaternion.Euler(-90, 0, 0));
             playerInputActions.PlayerMov.Disable();
             GameManager.Instance._insideDiggingHole = false;
             Destroy(this.gameObject);
@@ -40,6 +42,7 @@ public class DirtAssetScrip : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             GameManager.Instance._insideDiggingHole = true;
+            _inRange = true;
         }
         
     }
@@ -48,6 +51,7 @@ public class DirtAssetScrip : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             GameManager.Instance._insideDiggingHole = false;
+            _inRange = false;
         }
     }
 }

@@ -11,6 +11,9 @@ TagManager:
   - Kitchen
   - Food
   - Rocket
+  - RepairPart1
+  - RepairPart2
+  - RepairPart3
   layers:
   - Default
   - TransparentFX

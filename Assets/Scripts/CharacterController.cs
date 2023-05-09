@@ -53,7 +53,7 @@ public class CharacterController : MonoBehaviour
     {
         _moveDir = orientation.forward * _moveInput.y + orientation.right * _moveInput.x;
       
-            _rb.AddForce(_moveDir.normalized * GameManager.Instance._speed * 10f, ForceMode.Force);
+        _rb.velocity = _moveDir.normalized * GameManager.Instance._speed ;
         
       
 

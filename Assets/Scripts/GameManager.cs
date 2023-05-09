@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     
     public int _speed;
     public bool _holdingMainTank;
+    public bool _gear;
 
     public bool _holdingShovel, _insideDiggingHole;
 
@@ -19,6 +20,8 @@ public class GameManager : MonoBehaviour
     public bool _disable;
     public float _timer;
     public int _easterEggCounter;
+
+    public bool _canMove;
 
 
     private void Awake()
@@ -38,10 +41,12 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        _canMove = true;
+        _gear = false;
         _disable = false;
         timer = 0.5f;
         timer2 = 0.5f;
-        _speed = 10;
+        _speed = 4;
         _tank1OxygenLevel = 100;
         _tank2OxygenLevel = 0;
         _playerHealth = 100;
