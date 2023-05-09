@@ -34,20 +34,28 @@ public class CharacterController : MonoBehaviour
 
     void Update()
     {
-        _moveInput = playerInputActions.PlayerMov.Movement.ReadValue<Vector2>();
-
-        _rb.drag = _rbDrag;
-
-        Debug.Log(_moveDir);
-        if (_moveInput == Vector2.zero)
+        if (GameManager.Instance._canMove)
         {
-            _rb.velocity = Vector3.zero;
+            _moveInput = playerInputActions.PlayerMov.Movement.ReadValue<Vector2>();
+
+            _rb.drag = _rbDrag;
+
+            Debug.Log(_moveDir);
+            if (_moveInput == Vector2.zero)
+            {
+                _rb.velocity = Vector3.zero;
+            }
         }
+     
 
     }
     private void FixedUpdate()
     {
-        Movement();
+        if (GameManager.Instance._canMove)
+        {
+            Movement();
+        }
+       
     }
     private void Movement()
     {
@@ -57,9 +65,5 @@ public class CharacterController : MonoBehaviour
         
       
 
-    }
-    private void Rotation()
-    {
-        
     }
 }
