@@ -22,7 +22,7 @@ public class DirtAssetScrip : MonoBehaviour
         
         if(GameManager.Instance._insideDiggingHole && GameManager.Instance._holdingShovel && _inRange)
         {
-            Debug.Log(gameObject.tag);
+            //Debug.Log(gameObject.tag); 
             if (this.gameObject.CompareTag("RepairPart3"))
             {
                 Instantiate(_obj, this.transform.position + new Vector3(0, 4, 0), Quaternion.Euler(-90, 0, 0));
@@ -34,6 +34,7 @@ public class DirtAssetScrip : MonoBehaviour
             
             playerInputActions.PlayerMov.Disable();
             GameManager.Instance._insideDiggingHole = false;
+            PickUpScript.timer2 = 0.5f;
             Destroy(this.gameObject);
         }
 

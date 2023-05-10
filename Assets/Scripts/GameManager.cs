@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 
     public bool _holdingSecondaryTank;
     public GameObject _item;
-    public Animator fadeAnim;
+   
     public bool _disable;
     public float _timer;
     public int _easterEggCounter;
@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public bool _canMove;
 
     public bool _insideHouse;
+    public bool _holdingFlag;
 
 
     private void Awake()

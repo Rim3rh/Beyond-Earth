@@ -7,6 +7,8 @@ public class FadeInFadeOut : MonoBehaviour
 {
     //public Animator fadeAnim;
     // Start is called before the first frame update
+    int cont;
+    public Animator fadeAnim;
     void Start()
     {
         
@@ -17,31 +19,26 @@ public class FadeInFadeOut : MonoBehaviour
     {
         if (GameManager.Instance._playerHealth <= 0)
         {
-            int sceneBuildIndex = SceneManager.GetActiveScene().buildIndex;
-
-            if(sceneBuildIndex == 0)
+            if(cont <= 0)
             {
-                StartCoroutine(ChangeToSceneB());
-            }
-            else
-            {
-                StartCoroutine(ChangeToSceneA());
+                StartCoroutine(ChangeToGameOver());
+                cont++;
             }
         }
     }
     
-    IEnumerator ChangeToSceneB()
+    IEnumerator ChangeToGameOver()
     {
-        GameManager.Instance.fadeAnim.SetTrigger("exit");
+        fadeAnim.Play("Fade");
         yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
-
+    /*
     IEnumerator ChangeToSceneA()
     {
         GameManager.Instance.fadeAnim.SetTrigger("exit");
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(0);
     }
-    
+    */
 }

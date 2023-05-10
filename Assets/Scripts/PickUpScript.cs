@@ -8,7 +8,7 @@ public class PickUpScript : MonoBehaviour
 {
     public GameObject _pickUpSlot;
     public static bool _isHolding, _timerRuning;
-    private float timer, timer2;
+    public static float timer, timer2;
     private GameObject _itemTem;
     private PlayerInputActions playerInputActions;
 
