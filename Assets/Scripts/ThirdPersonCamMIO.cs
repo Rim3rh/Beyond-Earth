@@ -24,18 +24,23 @@ public class ThirdPersonCamMIO : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _moveInput = playerInputActions.PlayerMov.Movement.ReadValue<Vector2>();
 
-        Vector3 viewDir = player.position - new Vector3(transform.position.x, player.position.y, transform.position.z);
-        orientation.forward = viewDir.normalized;
+        if (GameManager.Instance._canMove)
+        {
+            _moveInput = playerInputActions.PlayerMov.Movement.ReadValue<Vector2>();
 
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float VerticalInput = Input.GetAxis("Vertical");
+            Vector3 viewDir = player.position - new Vector3(transform.position.x, player.position.y, transform.position.z);
+            orientation.forward = viewDir.normalized;
 
-        Vector3 inputDir = orientation.forward * VerticalInput + orientation.right * horizontalInput;
+            float horizontalInput = Input.GetAxis("Horizontal");
+            float VerticalInput = Input.GetAxis("Vertical");
 
-        if (inputDir != Vector3.zero)
-            playerObj.forward = Vector3.Slerp(playerObj.forward, inputDir.normalized, Time.deltaTime * _rotateSpeed);
+            Vector3 inputDir = orientation.forward * VerticalInput + orientation.right * horizontalInput;
+
+            if (inputDir != Vector3.zero)
+                playerObj.forward = Vector3.Slerp(playerObj.forward, inputDir.normalized, Time.deltaTime * _rotateSpeed);
+        }
+        
 
     }
     

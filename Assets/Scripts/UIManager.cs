@@ -29,7 +29,7 @@ public class UIManager : MonoBehaviour
     private void StatsDrop()
     {
         //FOOD
-        GameManager.Instance._playerFood -= Time.deltaTime * 2;
+        //GameManager.Instance._playerFood -= Time.deltaTime * 2;
 
         //Oxygen
         GameManager.Instance._playerOxygen = (GameManager.Instance._holdingMainTank) ? GameManager.Instance._tank1OxygenLevel : GameManager.Instance._tank2OxygenLevel;
