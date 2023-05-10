@@ -40,7 +40,7 @@ public class CharacterController : MonoBehaviour
 
             _rb.drag = _rbDrag;
 
-            Debug.Log(_moveDir);
+            //Debug.Log(_moveDir);
             if (_moveInput == Vector2.zero)
             {
                 _rb.velocity = Vector3.zero;

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5791979552504978074}
   - component: {fileID: 2417417283047595344}
   - component: {fileID: 6877837245773869714}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SM_Cohete_Remache_087
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 8420231686124822792}
   - component: {fileID: 8485396291315799732}
   - component: {fileID: 7707904089463086696}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SM_Cohete_Remache_088
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 5426814323183317319}
   - component: {fileID: 3127421801772082914}
   - component: {fileID: 3115207321058731610}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SM_Cohete_Remache_086
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 7121785649566625507}
   - component: {fileID: 604758896060731239}
   - component: {fileID: 2996386005545488380}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SM_Cohete_Remache_077
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -343,7 +343,7 @@ GameObject:
   - component: {fileID: 372295250875176675}
   - component: {fileID: 5142016620869441489}
   - component: {fileID: 2578506630513874154}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SM_Cohete_Remache_078
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -426,7 +426,7 @@ GameObject:
   - component: {fileID: 3400337727147600018}
   - component: {fileID: 1611457798812325792}
   - component: {fileID: 2328306448463067900}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SM_Cohete_Remache_074
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -509,7 +509,7 @@ GameObject:
   - component: {fileID: 857599931872811625}
   - component: {fileID: 240862869714343218}
   - component: {fileID: 6177242458602724238}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SM_Cohete_Remache_081
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -592,7 +592,7 @@ GameObject:
   - component: {fileID: 1698082697699072057}
   - component: {fileID: 6146161993407302478}
   - component: {fileID: 5086058763765990221}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SM_Cohete_Remache_076
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -675,7 +675,7 @@ GameObject:
   - component: {fileID: 7526011502611699730}
   - component: {fileID: 5675153626119667126}
   - component: {fileID: 7651968935356232344}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SM_Cohete_Remache_083
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -758,7 +758,7 @@ GameObject:
   - component: {fileID: 7922181908832132974}
   - component: {fileID: 5789291452184094860}
   - component: {fileID: 2695396613816924515}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SM_Cohete_Remache_073
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -841,7 +841,7 @@ GameObject:
   - component: {fileID: 3765804493064249119}
   - component: {fileID: 7988346249167331204}
   - component: {fileID: 8797132739198067554}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SM_Cohete_Remache_090
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -922,9 +922,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5519320753649309927}
-  m_Layer: 0
+  - component: {fileID: 675662525859238971}
+  m_Layer: 6
   m_Name: ASSET_ParteReparar3
-  m_TagString: Untagged
+  m_TagString: RepairPart3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -963,6 +964,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &675662525859238971
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5175551139185492573}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.8982677, y: 1.707271, z: 2.767031}
+  m_Center: {x: -0.0015764236, y: -0.05798003, z: -0.8835156}
 --- !u!1 &5595784466120591578
 GameObject:
   m_ObjectHideFlags: 0
@@ -974,7 +988,7 @@ GameObject:
   - component: {fileID: 5083752732673080651}
   - component: {fileID: 6422327920593652591}
   - component: {fileID: 4994822747397296609}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SM_Cohete_Remache_075
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1057,7 +1071,7 @@ GameObject:
   - component: {fileID: 2925751802023103493}
   - component: {fileID: 692687183902232698}
   - component: {fileID: 2792350483019316650}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SM_Cohete_Remache_084
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1140,7 +1154,7 @@ GameObject:
   - component: {fileID: 4983646179970960749}
   - component: {fileID: 698576135963164870}
   - component: {fileID: 4264213755298858989}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SM_Cohete_Remache_079
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1223,7 +1237,7 @@ GameObject:
   - component: {fileID: 3476123659410149654}
   - component: {fileID: 3119696084194456382}
   - component: {fileID: 5323169130790889508}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SM_Cohete_Remache_085
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1306,7 +1320,7 @@ GameObject:
   - component: {fileID: 786349892351595772}
   - component: {fileID: 7554232191244998339}
   - component: {fileID: 3968092450520402766}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SM_Cohete_Remache_082
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1389,7 +1403,7 @@ GameObject:
   - component: {fileID: 6007903786493589781}
   - component: {fileID: 7647629787597757109}
   - component: {fileID: 1155728901591434657}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SM_Cohete_Cuerpo_003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1472,7 +1486,7 @@ GameObject:
   - component: {fileID: 8094807000598944189}
   - component: {fileID: 6327889160792678069}
   - component: {fileID: 6421843606060643160}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SM_Cohete_Remache_089
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1555,7 +1569,7 @@ GameObject:
   - component: {fileID: 4369349430274441165}
   - component: {fileID: 3685354494751958304}
   - component: {fileID: 594527253151936555}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SM_Cohete_Remache_080
   m_TagString: Untagged
   m_Icon: {fileID: 0}

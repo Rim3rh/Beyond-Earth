@@ -19,10 +19,19 @@ public class DirtAssetScrip : MonoBehaviour
 
     private void Interact_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-
+        
         if(GameManager.Instance._insideDiggingHole && GameManager.Instance._holdingShovel && _inRange)
         {
-            Instantiate(_obj,  this.transform.position + new Vector3(0, 0, 0), Quaternion.Euler(-90, 0, 0));
+            Debug.Log(gameObject.tag);
+            if (this.gameObject.CompareTag("RepairPart3"))
+            {
+                Instantiate(_obj, this.transform.position + new Vector3(0, 4, 0), Quaternion.Euler(-90, 0, 0));
+            }
+            else
+            {
+                Instantiate(_obj, this.transform.position + new Vector3(0, 0, 0), Quaternion.Euler(-90, 0, 0));
+            }
+            
             playerInputActions.PlayerMov.Disable();
             GameManager.Instance._insideDiggingHole = false;
             Destroy(this.gameObject);
