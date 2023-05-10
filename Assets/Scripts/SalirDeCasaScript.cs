@@ -30,9 +30,9 @@ public class SalirDeCasaScript : MonoBehaviour
     {
         GameManager.Instance._canMove = false;
         _fade.Play("Fade");
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         _player.transform.position = _houseExit.transform.position;
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
         
         GameManager.Instance._canMove = true;
 

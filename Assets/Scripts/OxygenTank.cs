@@ -48,7 +48,7 @@ public class OxygenTank : MonoBehaviour
         if (GameManager.Instance._holdingMainTank)
         {
             this.transform.position = _oxygenSlot.transform.position;
-            this.transform.rotation = _oxygenSlot.transform.rotation;
+            this.transform.rotation = Quaternion.Euler(_oxygenSlot.transform.rotation.x, _oxygenSlot.transform.rotation.y, _oxygenSlot.transform.rotation.z);
             //oxygen level goes down
             GameManager.Instance._tank1OxygenLevel -= Time.deltaTime * 2;
         }

@@ -7,7 +7,7 @@ public class RepairRocket : MonoBehaviour
 {
     private PlayerInputActions playerInputActions;
 
-    public CinemachineVirtualCamera _cam;
+    public CinemachineVirtualCamera _cam, _cam2;
     public ParticleSystem _particle;
 
     private GameObject _repairPart1, _repairPart2, _repairPart3;
@@ -35,6 +35,10 @@ public class RepairRocket : MonoBehaviour
 
     private void Interact_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
+        
+
+
+
         if (_repairPartBool1)
         {
             _fixedPart1 = true;
@@ -70,7 +74,7 @@ public class RepairRocket : MonoBehaviour
 
             if(contador2 <= 1)
             {
-                StartCoroutine(ChangeCam(_repairPart2, new Vector3(10.68563f, 4.42374f, 47.02574f), new Vector3(-90, 0, 55.385f)));
+                StartCoroutine(ChangeCam2(_repairPart2, new Vector3(10.68563f, 4.42374f, 47.02574f), new Vector3(-90, 0, 55.385f)));
                 contador2++;
             }
             
@@ -104,6 +108,24 @@ public class RepairRocket : MonoBehaviour
     }
 
 
+    private IEnumerator ChangeCam2(GameObject name, Vector3 pos, Vector3 rot)
+    {
+
+        GameManager.Instance._canMove = false;
+        _cam2.Priority = 40;
+
+        yield return new WaitForSeconds(1.5f);
+        _particle.Play();
+        yield return new WaitForSeconds(0.75f);
+        name.transform.position = pos;
+        name.transform.rotation = Quaternion.Euler(rot);
+        LeanTween.moveX(_cam2.gameObject, 9, 2f);
+        yield return new WaitForSeconds(3f);
+        _cam2.Priority = 10;
+        GameManager.Instance._canMove = true;
+    }
+
+
 
 
     private void OnTriggerEnter(Collider other)
@@ -121,6 +143,7 @@ public class RepairRocket : MonoBehaviour
         }
         if (other.CompareTag("RepairPart3"))
         {
+            Debug.Log("LAÑSMJDPOANSFDJOIMANDS");
             _repairPartBool3 = true;
             _repairPart3 = other.gameObject;
         }
