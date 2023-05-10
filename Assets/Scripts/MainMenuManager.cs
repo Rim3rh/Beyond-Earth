@@ -7,6 +7,8 @@ public class MainMenuManager : MonoBehaviour
 {
     public GameObject _stars;
 
+    public Animator _black;
+
     void Start()
     {
         
@@ -20,12 +22,21 @@ public class MainMenuManager : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadScene(1);
+        StartCoroutine(Play());
     }
+
+
     public void ExitGame()
     {
         Application.Quit();
     }
 
+
+    public IEnumerator Play()
+    {
+        _black.Play("FadeOut");
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(1);
+    }
 
 }

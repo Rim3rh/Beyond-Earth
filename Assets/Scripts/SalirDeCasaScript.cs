@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class SalirDeCasaScript : MonoBehaviour
 {
-    
+    public Animator _fade;
+    public GameObject _player;
+    public Transform _houseExit;
     void Start()
     {
         
@@ -26,8 +28,14 @@ public class SalirDeCasaScript : MonoBehaviour
 
     private IEnumerator SalirCasa()
     {
+        GameManager.Instance._canMove = false;
+        _fade.Play("Fade");
+        yield return new WaitForSeconds(1f);
+        _player.transform.position = _houseExit.transform.position;
+        yield return new WaitForSeconds(1.5f);
+        
+        GameManager.Instance._canMove = true;
 
-        yield return new WaitForSeconds(1);
 
     }
 
