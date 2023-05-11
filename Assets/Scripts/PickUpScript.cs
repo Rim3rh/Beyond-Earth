@@ -62,7 +62,7 @@ public class PickUpScript : MonoBehaviour
             GameManager.Instance._item = _itemTem;
             _isHolding = true;
             timer2 = 0.5f;
-            GameManager.Instance._speed = 6;
+            GameManager.Instance._speed = 4;
             _UiManager.GetComponent<UIManager>().HudInteractOff();
         }
     }

@@ -14,7 +14,6 @@ public class UIManager : MonoBehaviour
     void Update()
     {
        
-        if (GameManager.Instance._playerHealth <= 0) SceneManager.LoadScene(1);
         UpdateSliderValues();
         StatsDrop();
         SetMaxValues();

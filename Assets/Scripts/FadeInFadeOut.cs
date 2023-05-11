@@ -33,12 +33,5 @@ public class FadeInFadeOut : MonoBehaviour
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(2);
     }
-    /*
-    IEnumerator ChangeToSceneA()
-    {
-        GameManager.Instance.fadeAnim.SetTrigger("exit");
-        yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene(0);
-    }
-    */
+ 
 }

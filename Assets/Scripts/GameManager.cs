@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
     public bool _insideHouse;
     public bool _holdingFlag;
 
+    public int _dirt1, _dirt2, _dirt3;
+
 
     private void Awake()
     {
@@ -50,7 +52,7 @@ public class GameManager : MonoBehaviour
         _disable = false;
         timer = 0.5f;
         timer2 = 0.5f;
-        _speed = 4;
+        _speed = 6;
         _tank1OxygenLevel = 100;
         _tank2OxygenLevel = 0;
         _playerHealth = 100;

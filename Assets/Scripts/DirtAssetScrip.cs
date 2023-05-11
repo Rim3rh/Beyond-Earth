@@ -9,8 +9,17 @@ public class DirtAssetScrip : MonoBehaviour
     public GameObject _obj;
     private bool _inRange;
 
+
+    public MeshFilter _3, _2, _1,_current;
+    private int _dirtCounter;
+    float _dirtTimer;
+    public ParticleSystem _paticles;
+    public GameObject _collider;
+
     void Start()
     {
+        _current = GetComponent<MeshFilter>();
+        _dirtCounter = 3;
         playerInputActions = new PlayerInputActions();
         playerInputActions.PlayerMov.Enable();
         playerInputActions.PlayerMov.Interact.started += Interact_started;
@@ -19,23 +28,40 @@ public class DirtAssetScrip : MonoBehaviour
 
     private void Interact_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-        
+       
+
+
+
         if(GameManager.Instance._insideDiggingHole && GameManager.Instance._holdingShovel && _inRange)
         {
-            //Debug.Log(gameObject.tag); 
-            if (this.gameObject.CompareTag("RepairPart3"))
+            _dirtTimer =- Time.deltaTime;
+            if (_dirtTimer < 0f)
             {
-                Instantiate(_obj, this.transform.position + new Vector3(0, 4, 0), Quaternion.Euler(-90, 0, 0));
-            }
-            else
-            {
-                Instantiate(_obj, this.transform.position + new Vector3(0, 0, 0), Quaternion.Euler(-90, 0, 0));
+                Debug.Log("goasl"); 
+                _dirtCounter--;
+                _dirtTimer = 0.5f;
+                _paticles.Play();
             }
             
-            playerInputActions.PlayerMov.Disable();
-            GameManager.Instance._insideDiggingHole = false;
-            PickUpScript.timer2 = 0.5f;
-            Destroy(this.gameObject);
+
+            if(_dirtCounter < 1)
+            {
+                if (this.gameObject.CompareTag("RepairPart3"))
+                {
+                    Instantiate(_obj, this.transform.position + new Vector3(0, 4, 0), Quaternion.Euler(-90, 0, 0));
+                }
+                else
+                {
+                    Instantiate(_obj, this.transform.position + new Vector3(0, 0, 0), Quaternion.Euler(-90, 0, 0));
+                }
+
+                playerInputActions.PlayerMov.Disable();
+                GameManager.Instance._insideDiggingHole = false;
+                PickUpScript.timer2 = 0.5f;
+                _collider.SetActive(false);
+                Destroy(this.gameObject);
+            }
+           
         }
 
 
@@ -44,7 +70,30 @@ public class DirtAssetScrip : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        switch (_dirtCounter)
+        {
+
+            case 3:
+                _current.sharedMesh = Resources.Load<Mesh>("ASSETMonton_A");
+
+
+
+                break;
+
+            case 2:
+                _current.sharedMesh = Resources.Load<Mesh>("ASSETMonton_B");
+
+                break;
+
+            case 1:
+
+                _current.sharedMesh = Resources.Load<Mesh>("ASSETMonton_C");
+
+                break;
+
+
+
+        }
     }
 
     private void OnTriggerEnter(Collider other)
