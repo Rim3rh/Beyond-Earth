@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
 
     public int _dirt1, _dirt2, _dirt3;
 
+    public float _musicVolume;
+
 
     private void Awake()
     {
@@ -46,6 +48,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        _musicVolume = 50;
         _insideHouse = true;
         _canMove = true;
         _gear = false;
