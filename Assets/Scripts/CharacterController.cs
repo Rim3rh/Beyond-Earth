@@ -18,6 +18,8 @@ public class CharacterController : MonoBehaviour
     private Vector3 _moveDir;
     private float _rbDrag;
 
+    public Animator _playerAnim;
+
 
 
     void Awake()
@@ -34,6 +36,13 @@ public class CharacterController : MonoBehaviour
 
     void Update()
     {
+        /*
+        if ()
+        {
+            _playerAnim
+        }
+        */
+
         if (GameManager.Instance._canMove)
         {
             _moveInput = playerInputActions.PlayerMov.Movement.ReadValue<Vector2>();

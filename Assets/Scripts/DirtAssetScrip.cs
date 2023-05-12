@@ -16,6 +16,8 @@ public class DirtAssetScrip : MonoBehaviour
     public ParticleSystem _paticles;
     public GameObject _collider;
 
+    public AudioSource _cabar1, _cabar2, _cabar3;
+
     void Start()
     {
         _current = GetComponent<MeshFilter>();
@@ -34,13 +36,47 @@ public class DirtAssetScrip : MonoBehaviour
 
         if(GameManager.Instance._insideDiggingHole && GameManager.Instance._holdingShovel && _inRange)
         {
-            _dirtTimer =- Time.deltaTime;
-            if (_dirtTimer < 0f)
+            
+           
+
+            switch (_dirtCounter)
             {
-                Debug.Log("goasl"); 
-                _dirtCounter--;
-                _dirtTimer = 0.5f;
-                _paticles.Play();
+                case 3:
+                    if (_dirtTimer < 0f)
+                    {
+                        // Debug.Log("goasl"); 
+                        _dirtCounter--;
+                        _dirtTimer = 0.5f;
+                        _paticles.Play();
+                        _cabar3.Play();
+                    }
+
+                    break;
+
+                case 2:
+                    if (_dirtTimer < 0f)
+                    {
+                        // Debug.Log("goasl"); 
+                        _dirtCounter--;
+                        _dirtTimer = 0.5f;
+                        _paticles.Play();
+                        _cabar2.Play();
+                    }
+
+                    break;
+                case 1:
+                    if (_dirtTimer < 0f)
+                    {
+                        // Debug.Log("goasl"); 
+                        _dirtCounter--;
+                        _dirtTimer = 0.5f;
+                        _paticles.Play();
+                        _cabar1.Play();
+                    }
+
+                    break;
+
+
             }
             
 
@@ -70,6 +106,7 @@ public class DirtAssetScrip : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        _dirtTimer -= Time.deltaTime;
         switch (_dirtCounter)
         {
 
