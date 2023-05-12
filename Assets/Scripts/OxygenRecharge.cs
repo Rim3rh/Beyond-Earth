@@ -6,6 +6,8 @@ public class OxygenRecharge : MonoBehaviour
 {
     private bool _tank1Chraging, _tank2Chraging;
     public GameObject _tank1, _tank2;
+    int _cont;
+    public ParticleSystem _oxygenFinish;
 
     void Start()
     {
@@ -19,15 +21,22 @@ public class OxygenRecharge : MonoBehaviour
         {
 
 
-            _tank1.transform.position = new Vector3(-7.479f, 2.934f, 23.775f);
+            _tank1.transform.position = new Vector3(-7.04f, 2.845f, 24.608f);
             _tank1.transform.rotation = Quaternion.Euler(83.992f, -143.518f, 2.082f);
             GameManager.Instance._tank1OxygenLevel += Time.deltaTime * 15;
+         
         }
         if (_tank2Chraging && !GameManager.Instance._holdingSecondaryTank)
         {
-            _tank2.transform.position = new Vector3(-7.479f, 2.934f, 23.775f);
+            _tank2.transform.position = new Vector3(-7.04f, 2.845f, 24.608f);
             _tank2.transform.rotation = Quaternion.Euler(83.992f, -143.518f, 2.082f);
             GameManager.Instance._tank2OxygenLevel += Time.deltaTime * 10;
+            if (GameManager.Instance._tank2OxygenLevel > 95 && _cont != 1)
+            {
+                _oxygenFinish.Play();
+                _cont++;
+                GameManager.Instance._firstTimeChangeTank = true;
+            }
         }
 
     }

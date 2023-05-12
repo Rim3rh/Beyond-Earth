@@ -14,6 +14,8 @@ public class PickUpScript : MonoBehaviour
 
     public GameObject _UiManager;
 
+    public Animator _playerAnim;
+
     void Start()
     {
         timer2 = 0.5f;
@@ -36,12 +38,14 @@ public class PickUpScript : MonoBehaviour
                 }
                 else
                 {
+                    _playerAnim.SetTrigger("COGER");
                     StartCoroutine(Prueba());
                 }
             }
             //Drop
             if (_isHolding && timer2 <= 0 && !GameManager.Instance._insideDiggingHole)
             {
+                _playerAnim.SetTrigger("COGER");
                 _itemTem = null;
                 GameManager.Instance._item = _itemTem;
                 _isHolding = false;

@@ -36,12 +36,9 @@ public class CharacterController : MonoBehaviour
 
     void Update()
     {
-        /*
-        if ()
-        {
-            _playerAnim
-        }
-        */
+
+        Animations();
+        
 
         if (GameManager.Instance._canMove)
         {
@@ -58,6 +55,8 @@ public class CharacterController : MonoBehaviour
      
 
     }
+
+
     private void FixedUpdate()
     {
         if (GameManager.Instance._canMove)
@@ -65,6 +64,19 @@ public class CharacterController : MonoBehaviour
             Movement();
         }
        
+    }
+
+
+    private void Animations()
+    {
+        if (_moveInput != Vector2.zero)
+        {
+            _playerAnim.SetBool("Moving", true);
+        }
+        else
+        {
+            _playerAnim.SetBool("Moving", false);
+        }
     }
     private void Movement()
     {

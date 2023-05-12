@@ -82,13 +82,20 @@ public class DirtAssetScrip : MonoBehaviour
 
             if(_dirtCounter < 1)
             {
-                if (this.gameObject.CompareTag("RepairPart3"))
+                if (_obj.gameObject.CompareTag("RepairPart3"))
                 {
-                    Instantiate(_obj, this.transform.position + new Vector3(0, 4, 0), Quaternion.Euler(-90, 0, 0));
+                    Debug.Log("CASE1");
+                    Instantiate(_obj, this.transform.position + new Vector3(0, 2.5f, 0), Quaternion.Euler(-90, 0, 0));
+                }
+                else if(_obj.gameObject.CompareTag("RepairPart2"))
+                {
+                    Debug.Log("CASE2");
+                    Instantiate(_obj, this.transform.position + new Vector3(0, 0, 0), Quaternion.Euler(-90, 0, 0));
                 }
                 else
                 {
-                    Instantiate(_obj, this.transform.position + new Vector3(0, 0, 0), Quaternion.Euler(-90, 0, 0));
+                    Debug.Log("CASE2");
+                    Instantiate(_obj, this.transform.position + new Vector3(0, 2, 0), Quaternion.Euler(-90, 0, 0));
                 }
 
                 playerInputActions.PlayerMov.Disable();

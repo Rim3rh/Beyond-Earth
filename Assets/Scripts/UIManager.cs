@@ -11,6 +11,8 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private Image _foodSlider, _healthSlider, _oxygenSlider;
     public GameObject _interactCanvas, _digCanvas, _buildCanvas, _swapCanvas, _needPartsCanvas;
+
+    public AudioSource _entrySound;
     void Update()
     {
        
@@ -98,6 +100,11 @@ public class UIManager : MonoBehaviour
     public void HudDigOff()
     {
         _digCanvas.SetActive(false);
+    }
+
+    public void EntrySound()
+    {
+        _entrySound.Play();
     }
 
 }

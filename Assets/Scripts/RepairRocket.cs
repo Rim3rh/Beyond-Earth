@@ -63,6 +63,7 @@ public class RepairRocket : MonoBehaviour
             {
                 StartCoroutine(ChangeCam(_repairPart1, new Vector3(12.143f, 5.08f, 49.591f), new Vector3(-90, 0, 50)));
                 contador++;
+                GameManager.Instance._FixedParts++;
             }
            
 
@@ -76,6 +77,7 @@ public class RepairRocket : MonoBehaviour
             {
                 StartCoroutine(ChangeCam2(_repairPart2, new Vector3(10.68563f, 4.42374f, 47.02574f), new Vector3(-90, 0, 55.385f)));
                 contador2++;
+                GameManager.Instance._FixedParts++;
             }
             
         }
@@ -85,6 +87,7 @@ public class RepairRocket : MonoBehaviour
             {
                 StartCoroutine(ChangeCam(_repairPart3, new Vector3(11.723f, 13.27719f, 47.584f), new Vector3(-90, 0, 0f)));
                 contador3++;
+                GameManager.Instance._FixedParts++;
             }
         }
 

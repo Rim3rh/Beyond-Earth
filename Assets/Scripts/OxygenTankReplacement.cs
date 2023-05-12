@@ -18,6 +18,8 @@ public class OxygenTankReplacement : MonoBehaviour
     [SerializeField] Color _myColor;
     [SerializeField] Color _myColor2;
     private PlayerInputActions _playerInputActions;
+    public Animator _KeepBreathign, _lestGetGoing, _plantFlag;
+    private bool _nashe;
 
 
     void Start()
@@ -30,6 +32,7 @@ public class OxygenTankReplacement : MonoBehaviour
 
         _oxygenRender = GetComponent<MeshRenderer>();
         _inRange = false;
+
     }
 
     private void ChangeTank_started(UnityEngine.InputSystem.InputAction.CallbackContext context)
@@ -39,6 +42,13 @@ public class OxygenTankReplacement : MonoBehaviour
             GameManager.Instance.timer2 -= Time.deltaTime;
             if (_inRange)
             {
+                if (GameManager.Instance._firstTimeChangeTank && !_nashe)
+                {
+                    _KeepBreathign.Play("Exit");
+                    _lestGetGoing.Play("Entry");
+                    _nashe = true;
+                }
+
                 if (context.started && GameManager.Instance.timer2 < 0)
                 {
                     _mainTank.transform.position = _oxygenDrop.transform.position;
@@ -56,6 +66,14 @@ public class OxygenTankReplacement : MonoBehaviour
 
     void Update()
     {
+        if(GameManager.Instance._FixedParts == 3)
+        {
+            _lestGetGoing.Play("Exit");
+
+        }
+
+
+
         //Debug.Log(GameManager.Instance._item);
         SetLimits();
 

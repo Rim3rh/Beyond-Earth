@@ -29,6 +29,9 @@ public class GameManager : MonoBehaviour
     public int _dirt1, _dirt2, _dirt3;
 
     public float _musicVolume;
+    public bool _firstTimeChangeTank;
+
+    public int _FixedParts;
 
 
     private void Awake()
