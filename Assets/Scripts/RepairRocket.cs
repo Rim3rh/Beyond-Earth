@@ -2,19 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.SceneManagement;
 
 public class RepairRocket : MonoBehaviour
 {
     private PlayerInputActions playerInputActions;
 
-    public CinemachineVirtualCamera _cam, _cam2;
+    public CinemachineVirtualCamera _cam, _cam2, _endCam;
     public ParticleSystem _particle;
 
     private GameObject _repairPart1, _repairPart2, _repairPart3;
     public bool _repairPartBool1, _repairPartBool2, _repairPartBool3;
     public bool _fixedPart1, _fixedPart2, _fixedPart3;
 
-    int contador, contador2, contador3;
+    int contador, contador2, contador3, cont4;
+
+
+    public ParticleSystem _rocket;
+
+
+
+
+
+
+    private bool _playInside;
    // public GameObject _cam;
 
     void Awake()
@@ -35,7 +46,19 @@ public class RepairRocket : MonoBehaviour
 
     private void Interact_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-        
+
+       
+
+
+
+        if(_playInside && GameManager.Instance._canLeave && cont4 <1)
+        {
+            //PLAY END ANIMATION
+
+            StartCoroutine(LoadEndScene());
+            cont4++;
+
+        }
 
 
 
@@ -56,11 +79,18 @@ public class RepairRocket : MonoBehaviour
     void Update()
     {
 
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            StartCoroutine(LoadEndScene());
+        }
+
+
         if (_fixedPart1 && !PickUpScript._isHolding)
         {
             
-            if (contador <= 1)
+            if (contador < 1)
             {
+
                 StartCoroutine(ChangeCam(_repairPart1, new Vector3(12.143f, 5.08f, 49.591f), new Vector3(-90, 0, 50)));
                 contador++;
                 GameManager.Instance._FixedParts++;
@@ -73,7 +103,7 @@ public class RepairRocket : MonoBehaviour
         if (_fixedPart2 && !PickUpScript._isHolding)
         {
 
-            if(contador2 <= 1)
+            if(contador2 < 1)
             {
                 StartCoroutine(ChangeCam2(_repairPart2, new Vector3(10.68563f, 4.42374f, 47.02574f), new Vector3(-90, 0, 55.385f)));
                 contador2++;
@@ -83,7 +113,7 @@ public class RepairRocket : MonoBehaviour
         }
         if (_fixedPart3 && !PickUpScript._isHolding)
         {
-            if (contador3 <= 1)
+            if (contador3 < 1)
             {
                 StartCoroutine(ChangeCam(_repairPart3, new Vector3(11.723f, 13.27719f, 47.584f), new Vector3(-90, 0, 0f)));
                 contador3++;
@@ -150,6 +180,14 @@ public class RepairRocket : MonoBehaviour
             _repairPartBool3 = true;
             _repairPart3 = other.gameObject;
         }
+
+
+
+        if (other.CompareTag("Player"))
+        {
+            _playInside = true;
+        }
+
     }
 
     private void OnTriggerExit(Collider other)
@@ -166,5 +204,36 @@ public class RepairRocket : MonoBehaviour
         {
             _repairPartBool3 = false;
         }
+
+
+
+
+
+        if (other.CompareTag("Player"))
+        {
+            //LOAD END SCENE
+            _playInside = false;
+        }
+
     }
+
+
+
+    public IEnumerator LoadEndScene()
+    {
+
+        _endCam.Priority = 100;
+        yield return new WaitForSeconds(2);
+        _rocket.Play();
+        LeanTween.moveLocalY(this.gameObject, 50, 3f).setEaseInCirc();
+
+        yield return new WaitForSeconds(4);
+        SceneManager.LoadScene(3);
+
+
+
+    }
+
+
+
 }

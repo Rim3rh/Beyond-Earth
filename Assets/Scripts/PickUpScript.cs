@@ -74,7 +74,21 @@ public class PickUpScript : MonoBehaviour
     {
         if (_isHolding)
         {
-            GameManager.Instance._item.transform.position = _pickUpSlot.transform.position;
+            
+
+            if (GameManager.Instance._item.CompareTag("RepairPart1"))
+            {
+                GameManager.Instance._item.transform.position = new Vector3(_pickUpSlot.transform.position.x, _pickUpSlot.transform.position.y + 2, _pickUpSlot.transform.position.z);
+
+            }
+            else if(GameManager.Instance._item.CompareTag("RepairPart3"))
+            {
+                GameManager.Instance._item.transform.position = new Vector3(_pickUpSlot.transform.position.x, _pickUpSlot.transform.position.y + 2, _pickUpSlot.transform.position.z);
+            }
+            else
+            {
+                GameManager.Instance._item.transform.position = _pickUpSlot.transform.position;
+            }
             timer2 -= Time.deltaTime;
         }
         if (_timerRuning)

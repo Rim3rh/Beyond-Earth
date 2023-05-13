@@ -6,10 +6,16 @@ public class OxygenTank : MonoBehaviour
 {
 
     private bool _inRange;
-    public GameObject _oxygenSlot, _secondaryTank, _oxygenDrop;
+    public GameObject _oxygenSlot, _secondaryTank, _oxygenDrop, _runOxygenSlot;
     public MeshRenderer _oxygenRender;
     [SerializeField] Color _myColor, _myColor2;
     private PlayerInputActions _playerInputActions;
+
+    private Vector2 _moveInput;
+
+    
+
+    public GameObject _player;
     void Start()
     {
         _oxygenRender = GetComponent<MeshRenderer>();
@@ -39,6 +45,8 @@ public class OxygenTank : MonoBehaviour
 
     void Update()
     {
+
+        _moveInput = _playerInputActions.PlayerMov.Movement.ReadValue<Vector2>();
         SetLimits();
        // _oxygenRender.material.color = Color.Lerp(_myColor, _myColor2, GameManager.Instance._tank1OxygenLevel / 100);
         if (!PickUpScript._isHolding && GameManager.Instance._holdingSecondaryTank)
@@ -47,8 +55,36 @@ public class OxygenTank : MonoBehaviour
         }
         if (GameManager.Instance._holdingMainTank)
         {
-            this.transform.position = _oxygenSlot.transform.position;
-            this.transform.rotation = Quaternion.Euler(_oxygenSlot.transform.rotation.x, _oxygenSlot.transform.rotation.y, _oxygenSlot.transform.rotation.z);
+            //Quaternion rotation = Quaternion.Euler(90, 100, 100);
+            if (_moveInput != Vector2.zero)
+            {
+
+              
+                    transform.eulerAngles =  new Vector3(115, _player.transform.eulerAngles.y, 0);
+                    // transform.eulerAngles = new Vector3 (115, _player.transform.eulerAngles.y, 0);
+                    //transform.position = _runOxygenSlot.transform.position;
+                    transform.position = Vector3.Lerp(transform.position, _runOxygenSlot.transform.position, 0.5f);
+             
+          
+
+            }
+            else
+            {
+
+
+               
+                    transform.eulerAngles = new Vector3(90, _player.transform.eulerAngles.y, 0);
+                    //   transform.eulerAngles = new Vector3(90, _player.transform.eulerAngles.y, 0);
+                    //transform.position = _oxygenSlot.transform.position;
+                    transform.position = Vector3.Lerp(transform.position, _oxygenSlot.transform.position, 0.5f);
+                    //transform.position = Vector3.Lerp(_runOxygenSlot.transform.position, _oxygenSlot.transform.position, 0.5f);
+              
+
+            }
+            
+            
+
+
             //oxygen level goes down
             GameManager.Instance._tank1OxygenLevel -= Time.deltaTime * 2;
         }
