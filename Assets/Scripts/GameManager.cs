@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public float timer, timer2;
     
     public int _speed;
-    public bool _holdingMainTank;
+    public bool _holdingMainTank, _holdingFood;
     public bool _gear;
 
     public bool _holdingShovel, _insideDiggingHole;

@@ -22,7 +22,7 @@ public class UIManager : MonoBehaviour
     }
     private void UpdateSliderValues()
     {
-        _foodSlider.fillAmount = GameManager.Instance._playerFood / 100;
+        //_foodSlider.fillAmount = GameManager.Instance._playerFood / 100;
         _healthSlider.fillAmount = GameManager.Instance._playerHealth / 100;
         _oxygenSlider.fillAmount = GameManager.Instance._playerOxygen / 100;
     }
@@ -33,7 +33,7 @@ public class UIManager : MonoBehaviour
         //GameManager.Instance._playerFood -= Time.deltaTime * 2;
 
         //Oxygen
-        GameManager.Instance._playerOxygen = (GameManager.Instance._holdingMainTank) ? GameManager.Instance._tank1OxygenLevel : GameManager.Instance._tank2OxygenLevel;
+        GameManager.Instance._playerOxygen -= Time.deltaTime * 4;
 
 
         //Health

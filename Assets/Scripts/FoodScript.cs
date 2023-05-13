@@ -72,7 +72,7 @@ public class FoodScript : MonoBehaviour
     private IEnumerator Destroy()
     {
         GameManager.Instance._disable = true;
-        GameManager.Instance.AddFood(70);
+        GameManager.Instance.AddOxygen(75);
         yield return new WaitForSeconds(0.2f);
         GameManager.Instance._disable = false;
         playerInputActions.PlayerMov.Disable();
@@ -90,6 +90,7 @@ public class FoodScript : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             _inRange = true;
+            GameManager.Instance._holdingFood = true;
         }
     }
 
@@ -102,6 +103,7 @@ public class FoodScript : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             _inRange = false;
+            GameManager.Instance._holdingFood = false;
         }
     }
 }
