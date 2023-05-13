@@ -17,13 +17,14 @@ public class MainMenuManager : MonoBehaviour
     public AudioSource _music, _buttonclick;
 
     public Slider _volSlider;
-
+    
 
 
     public GameObject _play, _options;
-    private void Start()
+    private void Awake()
     {
         EventSystem.current.SetSelectedGameObject(_play);
+        _volSlider.value = 0.4f;
     }
 
     // Update is called once per frame

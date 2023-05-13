@@ -33,6 +33,8 @@ public class GameManager : MonoBehaviour
 
     public int _FixedParts;
 
+    public bool _canLeave;
+
 
     private void Awake()
     {

@@ -9,7 +9,7 @@ public class OxygenTankReplacement : MonoBehaviour
 
 
 
-    public GameObject _oxygenSlot;
+    public GameObject _oxygenSlot, _runOxygenSlot;
     public GameObject _oxygenDrop;
     public GameObject _mainTank;
 
@@ -21,6 +21,13 @@ public class OxygenTankReplacement : MonoBehaviour
     public Animator _KeepBreathign, _lestGetGoing, _plantFlag;
     private bool _nashe;
 
+    int cont;
+
+    private Vector2 _moveInput;
+
+
+
+    public GameObject _player;
 
     void Start()
     {
@@ -66,10 +73,13 @@ public class OxygenTankReplacement : MonoBehaviour
 
     void Update()
     {
-        if(GameManager.Instance._FixedParts == 3)
+   
+        if(GameManager.Instance._FixedParts == 3 && cont <1)
         {
+            
             _lestGetGoing.Play("Exit");
-
+            _plantFlag.Play("Entry");
+            cont++;
         }
 
 
@@ -87,8 +97,49 @@ public class OxygenTankReplacement : MonoBehaviour
 
         if (GameManager.Instance._holdingSecondaryTank)
         {
+
+
+
+
+
+            if (_moveInput != Vector2.zero)
+            {
+
+
+                transform.eulerAngles = new Vector3(115, _player.transform.eulerAngles.y, 0);
+                // transform.eulerAngles = new Vector3 (115, _player.transform.eulerAngles.y, 0);
+                //transform.position = _runOxygenSlot.transform.position;
+                transform.position = Vector3.Lerp(transform.position, _runOxygenSlot.transform.position, 0.5f);
+
+
+
+            }
+            else
+            {
+
+
+
+                transform.eulerAngles = new Vector3(90, _player.transform.eulerAngles.y, 0);
+                //   transform.eulerAngles = new Vector3(90, _player.transform.eulerAngles.y, 0);
+                //transform.position = _oxygenSlot.transform.position;
+                transform.position = Vector3.Lerp(transform.position, _oxygenSlot.transform.position, 0.5f);
+                //transform.position = Vector3.Lerp(_runOxygenSlot.transform.position, _oxygenSlot.transform.position, 0.5f);
+
+
+            }
+
+
+
+
+
+
+
+
+
             this.transform.position = _oxygenSlot.transform.position;
-            this.transform.rotation = _oxygenSlot.transform.rotation;
+           // this.transform.rotation = Quaternion.Euler(_oxygenDrop.transform.rotation.x + 90, _oxygenDrop.transform.rotation.y, _oxygenDrop.transform.rotation.z);
+
+
             //oxygen level goes down
             GameManager.Instance._tank2OxygenLevel -= Time.deltaTime * 2;
         }

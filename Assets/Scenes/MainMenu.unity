@@ -1230,6 +1230,9 @@ MonoBehaviour:
   _dirt2: 0
   _dirt3: 0
   _musicVolume: 0
+  _firstTimeChangeTank: 0
+  _FixedParts: 0
+  _canLeave: 0
 --- !u!4 &789714578
 Transform:
   m_ObjectHideFlags: 0

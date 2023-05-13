@@ -36,8 +36,10 @@ public class FlagMission : MonoBehaviour
         if (_placed)
         {
             _flag.transform.position = new Vector3(1.32f, 1.3f, 37.80f);
-
+            
             _flag.transform.rotation = Quaternion.Euler(-90f, 0f, 42.24f);
+            GameManager.Instance._canLeave = true;
+            
         }
     }
 
