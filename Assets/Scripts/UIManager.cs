@@ -4,18 +4,34 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class UIManager : MonoBehaviour
 {
    // public static UIManager Instance { get; private set; }
 
-    [SerializeField] private Image _foodSlider, _healthSlider, _oxygenSlider;
+    [SerializeField] private Image _healthSlider, _oxygenSlider;
     public GameObject _interactCanvas, _digCanvas, _buildCanvas, _swapCanvas, _needPartsCanvas;
 
     public AudioSource _entrySound;
+
+   [SerializeField] private GameObject  _optionsMenu, _optionsOptions, _pauseNormal, _exitButton, _resumeButton;
+
+
+
+
+    public Slider _sfxSlider, _volSlider;
+
+    private void Awake()
+    {
+        _sfxSlider.value = GameManager.Instance._sfxVolume;
+        _volSlider.value = GameManager.Instance._musicVolume;
+    }
     void Update()
     {
-       
+        GameManager.Instance._sfxVolume = _sfxSlider.value;
+        GameManager.Instance._musicVolume = _volSlider.value;
+
         UpdateSliderValues();
         StatsDrop();
         SetMaxValues();
@@ -106,5 +122,40 @@ public class UIManager : MonoBehaviour
     {
         _entrySound.Play();
     }
+
+
+
+
+
+    public void ResumeGame()
+    {
+        EntrySound();
+        Time.timeScale = 1f;
+        _optionsMenu.SetActive(false);
+        GameManager.Instance._openedMenu = false;
+    }
+    public void OpenOptions()
+    {
+        EntrySound();
+        _optionsOptions.SetActive(true);
+        _pauseNormal.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(_exitButton);
+    }
+    public void CloseOptions()
+    {
+        EntrySound();
+        _optionsOptions.SetActive(false);
+        _pauseNormal.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(_resumeButton);
+    }
+
+    public void GoToMainMenu()
+    {
+        EntrySound();
+        SceneManager.LoadScene(0);
+    }
+
 
 }

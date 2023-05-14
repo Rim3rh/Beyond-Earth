@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public class PickUpScript : MonoBehaviour
 {
-    public GameObject _pickUpSlot;
+    public GameObject _pickUpSlot, _pickUpSlot2;
     public static bool _isHolding, _timerRuning;
     public static float timer, timer2;
     private GameObject _itemTem;
@@ -86,11 +86,18 @@ public class PickUpScript : MonoBehaviour
             if (GameManager.Instance._item.CompareTag("RepairPart1"))
             {
                 GameManager.Instance._item.transform.position = new Vector3(_pickUpSlot.transform.position.x, _pickUpSlot.transform.position.y + 2, _pickUpSlot.transform.position.z);
+               // GameManager.Instance._item.transform.rotation = _pickUpSlot.transform.rotation;
 
             }
             else if(GameManager.Instance._item.CompareTag("RepairPart3"))
             {
-                GameManager.Instance._item.transform.position = new Vector3(_pickUpSlot.transform.position.x, _pickUpSlot.transform.position.y + 2, _pickUpSlot.transform.position.z);
+                GameManager.Instance._item.transform.position = new Vector3(_pickUpSlot2.transform.position.x, _pickUpSlot2.transform.position.y + 2 , _pickUpSlot2.transform.position.z );
+              //  GameManager.Instance._item.transform.rotation = Quaternion.Euler(-90, GameManager.Instance._item.transform.rotation.y, 0);
+            }
+            else if (GameManager.Instance._item.CompareTag("Shovel"))
+            {
+                GameManager.Instance._item.transform.position = new Vector3(_pickUpSlot.transform.position.x, _pickUpSlot.transform.position.y, _pickUpSlot.transform.position.z);
+               // GameManager.Instance._item.transform.rotation = Quaternion.Euler(_pickUpSlot.transform.rotation.x, _pickUpSlot.transform.rotation.y, _pickUpSlot.transform.rotation.z);
             }
             else
             {

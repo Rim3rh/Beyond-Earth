@@ -16,6 +16,7 @@ TagManager:
   - RepairPart3
   - Flag
   - SalirCasa
+  - Shovel
   layers:
   - Default
   - TransparentFX

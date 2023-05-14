@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 
 public class CharacterController : MonoBehaviour
@@ -22,13 +23,14 @@ public class CharacterController : MonoBehaviour
 
 
 
-    public GameObject _optionsMenu;
-    private bool _openedMenu;
+    public GameObject _optionsMenu, _resumeButton;
+    //private bool _openedMenu;
 
     void Awake()
     {
+        Cursor.visible = false;
         _optionsMenu.SetActive(false);
-        _openedMenu = false;
+        //_openedMenu = false;
 
         _rb = GetComponent<Rigidbody>();
         playerInputActions = new PlayerInputActions();
@@ -40,19 +42,24 @@ public class CharacterController : MonoBehaviour
     private void PAUSE_started(InputAction.CallbackContext obj)
     {
 
-        if (_openedMenu)
+        if (GameManager.Instance._openedMenu)
         {
+            EventSystem.current.SetSelectedGameObject(null);
+            
+
             Debug.Log("CERRAR");
             Time.timeScale = 1f;
             _optionsMenu.SetActive(false);
-            _openedMenu = false;
+           GameManager.Instance._openedMenu = false;
         }
         else
         {
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(_resumeButton);
             Debug.Log("ABIR");
             _optionsMenu.SetActive(true);
             Time.timeScale = 0f;
-            _openedMenu = true;
+           GameManager.Instance._openedMenu = true;
         }
 
         

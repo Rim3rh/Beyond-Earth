@@ -75,7 +75,7 @@ public class FoodScript : MonoBehaviour
             {
 
                 _cookingState += Time.deltaTime * 10;
-
+            
             }
 
 

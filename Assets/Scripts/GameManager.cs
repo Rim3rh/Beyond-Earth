@@ -40,6 +40,10 @@ public class GameManager : MonoBehaviour
     public int _skipFirstMision;
 
 
+    public bool _openedMenu;
+
+    public AudioSource _music;
+
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
@@ -57,6 +61,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        Cursor.visible = false;
         _musicVolume = 50;
         _sfxVolume = 50;
         _insideHouse = true;
@@ -78,12 +83,15 @@ public class GameManager : MonoBehaviour
         
     }
 
+    private void Update()
+    {
+        _music.volume = _musicVolume;
+    }
 
 
 
 
 
-    
 
     public void AddFood(int value)
     {
