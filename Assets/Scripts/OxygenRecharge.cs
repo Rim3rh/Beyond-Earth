@@ -9,6 +9,8 @@ public class OxygenRecharge : MonoBehaviour
     int _cont;
     public ParticleSystem _oxygenFinish;
 
+    private GameObject _tempFood;
+
     void Start()
     {
         
@@ -21,8 +23,12 @@ public class OxygenRecharge : MonoBehaviour
         {
 
 
-            _tank1.transform.position = new Vector3(-7.04f, 2.845f, 24.608f);
-            _tank1.transform.rotation = Quaternion.Euler(83.992f, -143.518f, 2.082f);
+            if(_tempFood != null)
+            {
+                _tempFood.transform.position = new Vector3(-7.2f, 2.845f, 24.4f);
+                _tempFood.transform.rotation = Quaternion.Euler(0f, -143.518f, 2.082f);
+            }
+            
             GameManager.Instance._tank1OxygenLevel += Time.deltaTime * 15;
             GameManager.Instance._oxygenCharging = true;
         }
@@ -40,6 +46,8 @@ public class OxygenRecharge : MonoBehaviour
         if (other.CompareTag("Oxigeno"))
         {
             _tank1Chraging = true;
+
+            _tempFood = other.gameObject;
         }
         if (other.CompareTag("Oxigeno2"))
         {
@@ -51,7 +59,9 @@ public class OxygenRecharge : MonoBehaviour
         if (other.CompareTag("Oxigeno"))
         {
             _tank1Chraging = false;
-            
+
+            _tempFood = other.gameObject;
+
         }
         if (other.CompareTag("Oxigeno2"))
         {

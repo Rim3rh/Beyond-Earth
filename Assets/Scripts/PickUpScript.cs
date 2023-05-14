@@ -95,6 +95,7 @@ public class PickUpScript : MonoBehaviour
             else
             {
                 GameManager.Instance._item.transform.position = _pickUpSlot.transform.position;
+                GameManager.Instance._item.transform.rotation = _pickUpSlot.transform.rotation;
             }
             timer2 -= Time.deltaTime;
         }

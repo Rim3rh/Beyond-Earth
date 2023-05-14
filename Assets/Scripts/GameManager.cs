@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
 
     public bool _canLeave;
 
+    public int _skipFirstMision;
+
 
     private void Awake()
     {
