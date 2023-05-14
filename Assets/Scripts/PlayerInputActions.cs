@@ -62,6 +62,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""PAUSE"",
+                    ""type"": ""Button"",
+                    ""id"": ""52d9fca1-e74c-4b74-b7bf-bbbfad0c3062"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -328,6 +337,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""CameraRotation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""be4eee56-b8ab-4c74-bae6-1473a69d0ad9"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PAUSE"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -368,6 +388,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_PlayerMov_Movement = m_PlayerMov.FindAction("Movement", throwIfNotFound: true);
         m_PlayerMov_ChangeTank = m_PlayerMov.FindAction("ChangeTank", throwIfNotFound: true);
         m_PlayerMov_CameraRotation = m_PlayerMov.FindAction("CameraRotation", throwIfNotFound: true);
+        m_PlayerMov_PAUSE = m_PlayerMov.FindAction("PAUSE", throwIfNotFound: true);
         // PauseMenu
         m_PauseMenu = asset.FindActionMap("PauseMenu", throwIfNotFound: true);
         m_PauseMenu_Newaction = m_PauseMenu.FindAction("New action", throwIfNotFound: true);
@@ -436,6 +457,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMov_Movement;
     private readonly InputAction m_PlayerMov_ChangeTank;
     private readonly InputAction m_PlayerMov_CameraRotation;
+    private readonly InputAction m_PlayerMov_PAUSE;
     public struct PlayerMovActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -444,6 +466,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_PlayerMov_Movement;
         public InputAction @ChangeTank => m_Wrapper.m_PlayerMov_ChangeTank;
         public InputAction @CameraRotation => m_Wrapper.m_PlayerMov_CameraRotation;
+        public InputAction @PAUSE => m_Wrapper.m_PlayerMov_PAUSE;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMov; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -465,6 +488,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @CameraRotation.started += instance.OnCameraRotation;
             @CameraRotation.performed += instance.OnCameraRotation;
             @CameraRotation.canceled += instance.OnCameraRotation;
+            @PAUSE.started += instance.OnPAUSE;
+            @PAUSE.performed += instance.OnPAUSE;
+            @PAUSE.canceled += instance.OnPAUSE;
         }
 
         private void UnregisterCallbacks(IPlayerMovActions instance)
@@ -481,6 +507,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @CameraRotation.started -= instance.OnCameraRotation;
             @CameraRotation.performed -= instance.OnCameraRotation;
             @CameraRotation.canceled -= instance.OnCameraRotation;
+            @PAUSE.started -= instance.OnPAUSE;
+            @PAUSE.performed -= instance.OnPAUSE;
+            @PAUSE.canceled -= instance.OnPAUSE;
         }
 
         public void RemoveCallbacks(IPlayerMovActions instance)
@@ -550,6 +579,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnChangeTank(InputAction.CallbackContext context);
         void OnCameraRotation(InputAction.CallbackContext context);
+        void OnPAUSE(InputAction.CallbackContext context);
     }
     public interface IPauseMenuActions
     {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FoodScript : MonoBehaviour
 {
-    public MeshRenderer _foodRender;
+   // public MeshRenderer _foodRender;
     [SerializeField] Color _myColor;
     [SerializeField] Color _myColor2;
     [SerializeField] ParticleSystem _kek;
@@ -43,7 +43,7 @@ public class FoodScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _foodRender.material.color = Color.Lerp(_myColor, _myColor2, _cookingState / 100);
+       // _foodRender.material.color = Color.Lerp(_myColor, _myColor2, _cookingState / 100);
 
         if (_cookingState >= 100)
         {

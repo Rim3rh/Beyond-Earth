@@ -31,21 +31,26 @@ public class PickUpScript : MonoBehaviour
         if (_itemTem != null)
         {
             //Grab
-            if (!_isHolding && timer <= 0)
+            if (!_isHolding && timer <= 0 && !GameManager.Instance._oxygenCharging)
             {
                 if (GameManager.Instance._holdingSecondaryTank && _itemTem.CompareTag("Oxigeno2"))
                 {
                 }
                 else
                 {
-                    _playerAnim.SetTrigger("COGER");
+                    //_playerAnim.SetTrigger("COGER");
                     StartCoroutine(Prueba());
                 }
             }
             //Drop
             if (_isHolding && timer2 <= 0 && !GameManager.Instance._insideDiggingHole)
             {
-                _playerAnim.SetTrigger("COGER");
+
+                if (_itemTem.CompareTag("Oxigeno"))
+                {
+                    GameManager.Instance._holdingFood = false;
+                }
+               // _playerAnim.SetTrigger("COGER");
                 _itemTem = null;
                 GameManager.Instance._item = _itemTem;
                 _isHolding = false;
@@ -74,7 +79,9 @@ public class PickUpScript : MonoBehaviour
     {
         if (_isHolding)
         {
-            
+
+            _playerAnim.SetBool("Grabing", true);
+
 
             if (GameManager.Instance._item.CompareTag("RepairPart1"))
             {
@@ -91,6 +98,13 @@ public class PickUpScript : MonoBehaviour
             }
             timer2 -= Time.deltaTime;
         }
+        else
+        {
+            _playerAnim.SetBool("Grabing", false);
+        }
+
+
+
         if (_timerRuning)
         {
             timer -= Time.deltaTime;

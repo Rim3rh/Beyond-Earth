@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public float timer, timer2;
     
     public int _speed;
-    public bool _holdingMainTank, _holdingFood;
+    public bool _holdingMainTank, _holdingFood, _oxygenCharging;
     public bool _gear;
 
     public bool _holdingShovel, _insideDiggingHole;
@@ -28,7 +28,9 @@ public class GameManager : MonoBehaviour
 
     public int _dirt1, _dirt2, _dirt3;
 
-    public float _musicVolume;
+    public float _musicVolume, _sfxVolume;
+
+
     public bool _firstTimeChangeTank;
 
     public int _FixedParts;
@@ -54,6 +56,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         _musicVolume = 50;
+        _sfxVolume = 50;
         _insideHouse = true;
         _canMove = true;
         _gear = false;

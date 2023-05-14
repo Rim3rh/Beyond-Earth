@@ -8,7 +8,7 @@ public class FadeInFadeOut : MonoBehaviour
     //public Animator fadeAnim;
     // Start is called before the first frame update
     int cont;
-    public Animator fadeAnim;
+    public Animator fadeAnim, _playerAnim;
     void Start()
     {
         
@@ -29,6 +29,9 @@ public class FadeInFadeOut : MonoBehaviour
     
     IEnumerator ChangeToGameOver()
     {
+        _playerAnim.SetTrigger("DEATH");
+        
+        yield return new WaitForSeconds(2f);
         fadeAnim.Play("Fade");
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(2);

@@ -33,7 +33,7 @@ public class UIManager : MonoBehaviour
         //GameManager.Instance._playerFood -= Time.deltaTime * 2;
 
         //Oxygen
-        GameManager.Instance._playerOxygen -= Time.deltaTime * 4;
+        GameManager.Instance._playerOxygen -= Time.deltaTime * 2;
 
 
         //Health

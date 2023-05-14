@@ -22,17 +22,41 @@ public class CharacterController : MonoBehaviour
 
 
 
+    public GameObject _optionsMenu;
+    private bool _openedMenu;
+
     void Awake()
     {
+        _optionsMenu.SetActive(false);
+        _openedMenu = false;
+
         _rb = GetComponent<Rigidbody>();
         playerInputActions = new PlayerInputActions();
         playerInputActions.PlayerMov.Enable();
+        playerInputActions.PlayerMov.PAUSE.started += PAUSE_started;
         _rbDrag = 6f;
     }
 
+    private void PAUSE_started(InputAction.CallbackContext obj)
+    {
 
+        if (_openedMenu)
+        {
+            Debug.Log("CERRAR");
+            Time.timeScale = 1f;
+            _optionsMenu.SetActive(false);
+            _openedMenu = false;
+        }
+        else
+        {
+            Debug.Log("ABIR");
+            _optionsMenu.SetActive(true);
+            Time.timeScale = 0f;
+            _openedMenu = true;
+        }
 
-
+        
+    }
 
     void Update()
     {

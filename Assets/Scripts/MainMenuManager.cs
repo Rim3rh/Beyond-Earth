@@ -16,7 +16,7 @@ public class MainMenuManager : MonoBehaviour
 
     public AudioSource _music, _buttonclick;
 
-    public Slider _volSlider;
+    public Slider _volSlider, _sfxSlider;
     
 
 
@@ -25,15 +25,18 @@ public class MainMenuManager : MonoBehaviour
     {
         EventSystem.current.SetSelectedGameObject(_play);
         _volSlider.value = 0.4f;
+        _sfxSlider.value = 0.4f;
     }
 
-    // Update is called once per frame
     void Update()
     {
         GameManager.Instance._musicVolume = _volSlider.value;
-
-
         _music.volume = GameManager.Instance._musicVolume;
+
+        GameManager.Instance._sfxVolume = _sfxSlider.value;
+
+
+        _buttonclick.volume = GameManager.Instance._sfxVolume;
 
 
         _stars.transform.Rotate(0, 0, -0.3f * Time.deltaTime);

@@ -24,7 +24,11 @@ public class OxygenRecharge : MonoBehaviour
             _tank1.transform.position = new Vector3(-7.04f, 2.845f, 24.608f);
             _tank1.transform.rotation = Quaternion.Euler(83.992f, -143.518f, 2.082f);
             GameManager.Instance._tank1OxygenLevel += Time.deltaTime * 15;
-         
+            GameManager.Instance._oxygenCharging = true;
+        }
+        else
+        {
+            GameManager.Instance._oxygenCharging = false;
         }
 
 

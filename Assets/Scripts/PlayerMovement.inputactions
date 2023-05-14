@@ -40,6 +40,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "PAUSE",
+                    "type": "Button",
+                    "id": "52d9fca1-e74c-4b74-b7bf-bbbfad0c3062",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -306,6 +315,17 @@
                     "action": "CameraRotation",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "be4eee56-b8ab-4c74-bae6-1473a69d0ad9",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PAUSE",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },

@@ -18,6 +18,9 @@ public class DirtAssetScrip : MonoBehaviour
 
     public AudioSource _cabar1, _cabar2, _cabar3;
 
+
+
+    public GameObject _digHUD;
     void Start()
     {
         _current = GetComponent<MeshFilter>();
@@ -102,6 +105,7 @@ public class DirtAssetScrip : MonoBehaviour
                 GameManager.Instance._insideDiggingHole = false;
                 PickUpScript.timer2 = 0.5f;
                 _collider.SetActive(false);
+                _digHUD.SetActive(false);
                 Destroy(this.gameObject);
             }
            
@@ -146,6 +150,12 @@ public class DirtAssetScrip : MonoBehaviour
         {
             GameManager.Instance._insideDiggingHole = true;
             _inRange = true;
+
+
+            if (GameManager.Instance._holdingShovel)
+            {
+                _digHUD.SetActive(true);
+            }
         }
         
     }
@@ -155,6 +165,12 @@ public class DirtAssetScrip : MonoBehaviour
         {
             GameManager.Instance._insideDiggingHole = false;
             _inRange = false;
+
+            if (GameManager.Instance._holdingShovel)
+            {
+                _digHUD.SetActive(false);
+            }
+            
         }
     }
 }
