@@ -7,7 +7,7 @@ public class FoodScript : MonoBehaviour
    // public MeshRenderer _foodRender;
     [SerializeField] Color _myColor;
     [SerializeField] Color _myColor2;
-    [SerializeField] ParticleSystem _kek;
+    [SerializeField] ParticleSystem _kek, _noticeMe;
 
     private float _cookingState;
     private PlayerInputActions playerInputActions;
@@ -15,7 +15,7 @@ public class FoodScript : MonoBehaviour
     public bool _isCooked;
     private bool _cooking;
     int cont = 0;
-
+    int cont2;
 
     public Animator _KeepBreathign, _lestGetGoing, _plantFlag;
 
@@ -26,12 +26,24 @@ public class FoodScript : MonoBehaviour
 
         playerInputActions = new PlayerInputActions();
         playerInputActions.PlayerMov.ChangeTank.started += Interact_started;
+        playerInputActions.PlayerMov.Interact.started += Interact_started1;
         playerInputActions.PlayerMov.Enable();
     }
 
+    private void Interact_started1(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        Debug.Log("ADSASD");
+        if (_inRange && cont2 <= 0)
+        {
+            Debug.Log("Dins");
+            _noticeMe.Stop();
+            cont2++;
+        }
+    }
 
     private void Interact_started(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
+        
         if (_isCooked && this.gameObject != null)
         {
             if(context.started && _inRange)
