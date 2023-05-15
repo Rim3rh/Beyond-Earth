@@ -10,6 +10,8 @@ public class EntrarCasaScript : MonoBehaviour
     public GameObject _player;
     public Transform _houseEnter;
     public CinemachineVirtualCamera _cam;
+
+    public GameObject _rocket1, _rocket2;
     void Start()
     {
         
@@ -31,6 +33,16 @@ public class EntrarCasaScript : MonoBehaviour
 
     private IEnumerator EntrarCasa()
     {
+        if (GameManager.Instance._replaceWithGoodTank)
+        {
+            _rocket1.SetActive(true);
+            _rocket2.SetActive(false);
+            GameObject.FindGameObjectWithTag("RepairPart1").SetActive(false);
+            GameObject.FindGameObjectWithTag("RepairPart2").SetActive(false);
+            GameObject.FindGameObjectWithTag("RepairPart3").SetActive(false);
+        }
+
+
         GameManager.Instance._canMove = false;
         _fade.Play("Fade");
         yield return new WaitForSeconds(0.5f);

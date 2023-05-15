@@ -17,6 +17,10 @@ TagManager:
   - Flag
   - SalirCasa
   - Shovel
+  - Cohete
+  - Consume
+  - Empty
+  - Dirt
   layers:
   - Default
   - TransparentFX

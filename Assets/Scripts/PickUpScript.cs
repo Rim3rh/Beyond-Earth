@@ -28,39 +28,46 @@ public class PickUpScript : MonoBehaviour
 
     private void Interact_started(InputAction.CallbackContext context)
     {
-        if (_itemTem != null)
-        {
-            //Grab
-            if (!_isHolding && timer <= 0 && !GameManager.Instance._oxygenCharging)
-            {
-                if (GameManager.Instance._holdingSecondaryTank && _itemTem.CompareTag("Oxigeno2"))
-                {
-                }
-                else
-                {
-                    //_playerAnim.SetTrigger("COGER");
-                    StartCoroutine(Prueba());
-                }
-            }
-            //Drop
-            if (_isHolding && timer2 <= 0 && !GameManager.Instance._insideDiggingHole)
-            {
 
-                if (_itemTem.CompareTag("Oxigeno"))
+        if (!GameManager.Instance._openedMenu)
+        {
+            if (_itemTem != null)
+            {
+                //Grab
+                if (!_isHolding && timer <= 0 && !GameManager.Instance._oxygenCharging)
                 {
-                    GameManager.Instance._holdingFood = false;
+                    if (GameManager.Instance._holdingSecondaryTank && _itemTem.CompareTag("Oxigeno2"))
+                    {
+                    }
+                    else
+                    {
+                        //_playerAnim.SetTrigger("COGER");
+                        StartCoroutine(Prueba());
+                    }
                 }
-               // _playerAnim.SetTrigger("COGER");
-                _itemTem = null;
-                GameManager.Instance._item = _itemTem;
-                _isHolding = false;
-                timer = 0.5f;
-                GameManager.Instance._speed = 6;
-               
-                _UiManager.GetComponent<UIManager>().HudInteractOn();
-                _timerRuning = true;
+                //Drop
+                if (_isHolding && timer2 <= 0 && !GameManager.Instance._insideDiggingHole)
+                {
+
+                    if (_itemTem.CompareTag("Oxigeno"))
+                    {
+                        GameManager.Instance._holdingFood = false;
+                    }
+                    // _playerAnim.SetTrigger("COGER");
+                    _itemTem = null;
+                    GameManager.Instance._item = _itemTem;
+                    _isHolding = false;
+                    GameManager.Instance._holdingRepairPart = false;
+                    timer = 0.5f;
+                    GameManager.Instance._speed = 6;
+
+                    // _UiManager.GetComponent<UIManager>().HudInteractOn();
+                    _timerRuning = true;
+                }
             }
+
         }
+        
     }
     IEnumerator Prueba()
     {
@@ -72,11 +79,13 @@ public class PickUpScript : MonoBehaviour
             _isHolding = true;
             timer2 = 0.5f;
             GameManager.Instance._speed = 4;
-            _UiManager.GetComponent<UIManager>().HudInteractOff();
+           // _UiManager.GetComponent<UIManager>().HudInteractOff();
         }
     }
     void Update()
     {
+
+      
         if (_isHolding)
         {
 
@@ -85,22 +94,32 @@ public class PickUpScript : MonoBehaviour
 
             if (GameManager.Instance._item.CompareTag("RepairPart1"))
             {
+                GameManager.Instance._holdingRepairPart = true;
                 GameManager.Instance._item.transform.position = new Vector3(_pickUpSlot.transform.position.x, _pickUpSlot.transform.position.y + 2, _pickUpSlot.transform.position.z);
                // GameManager.Instance._item.transform.rotation = _pickUpSlot.transform.rotation;
 
             }
             else if(GameManager.Instance._item.CompareTag("RepairPart3"))
             {
+                GameManager.Instance._holdingRepairPart = true;
                 GameManager.Instance._item.transform.position = new Vector3(_pickUpSlot2.transform.position.x, _pickUpSlot2.transform.position.y + 2 , _pickUpSlot2.transform.position.z );
               //  GameManager.Instance._item.transform.rotation = Quaternion.Euler(-90, GameManager.Instance._item.transform.rotation.y, 0);
             }
             else if (GameManager.Instance._item.CompareTag("Shovel"))
             {
+                GameManager.Instance._holdingRepairPart = false;
                 GameManager.Instance._item.transform.position = new Vector3(_pickUpSlot.transform.position.x, _pickUpSlot.transform.position.y, _pickUpSlot.transform.position.z);
                // GameManager.Instance._item.transform.rotation = Quaternion.Euler(_pickUpSlot.transform.rotation.x, _pickUpSlot.transform.rotation.y, _pickUpSlot.transform.rotation.z);
             }
+            else if(GameManager.Instance._item.CompareTag("RepairPart2"))
+            {
+                GameManager.Instance._holdingRepairPart = true;
+                GameManager.Instance._item.transform.position = _pickUpSlot.transform.position;
+                GameManager.Instance._item.transform.rotation = _pickUpSlot.transform.rotation;
+            }
             else
             {
+                GameManager.Instance._holdingRepairPart = false;
                 GameManager.Instance._item.transform.position = _pickUpSlot.transform.position;
                 GameManager.Instance._item.transform.rotation = _pickUpSlot.transform.rotation;
             }
@@ -160,20 +179,20 @@ public class PickUpScript : MonoBehaviour
     {
         if (other.gameObject.layer == 6 && !_isHolding)
         {
-            _UiManager.GetComponent<UIManager>().HudInteractOn();
+           // _UiManager.GetComponent<UIManager>().HudInteractOn();
         }
         if (other.gameObject.CompareTag("Oxigeno") && !GameManager.Instance._holdingMainTank && !_isHolding)
         {
-            _UiManager.GetComponent<UIManager>().HudInteractOn();
+           // _UiManager.GetComponent<UIManager>().HudInteractOn();
         }
         if (other.gameObject.CompareTag("Oxigeno2") && !GameManager.Instance._holdingSecondaryTank && !_isHolding)
         {
-            _UiManager.GetComponent<UIManager>().HudInteractOn();
+           // _UiManager.GetComponent<UIManager>().HudInteractOn();
         }
         //WHEN U ENTER THE ROCKET
         if (other.gameObject.CompareTag("Rocket"))
         {
-            _UiManager.GetComponent<UIManager>().HudBuildtOn();
+          //  _UiManager.GetComponent<UIManager>().HudBuildtOn();
         }
     }
     private void HudsExit(Collider other)
@@ -181,21 +200,21 @@ public class PickUpScript : MonoBehaviour
         //WHEN U ENTER THE ROCKET
         if (other.gameObject.CompareTag("Rocket"))
         {
-            _UiManager.GetComponent<UIManager>().HudBuildtOff();
+          // _UiManager.GetComponent<UIManager>().HudBuildtOff();
         }
 
 
         if (other.gameObject.layer == 6 && !_isHolding)
         {
-            _UiManager.GetComponent<UIManager>().HudInteractOff();
+          //  _UiManager.GetComponent<UIManager>().HudInteractOff();
         }
         if (other.gameObject.CompareTag("Oxigeno") && !GameManager.Instance._holdingMainTank && !_isHolding)
         {
-            _UiManager.GetComponent<UIManager>().HudInteractOff();
+           // _UiManager.GetComponent<UIManager>().HudInteractOff();
         }
         if (other.gameObject.CompareTag("Oxigeno2") && !GameManager.Instance._holdingSecondaryTank && !_isHolding)
         {
-            _UiManager.GetComponent<UIManager>().HudInteractOff();
+          //  _UiManager.GetComponent<UIManager>().HudInteractOff();
         }
     }
     

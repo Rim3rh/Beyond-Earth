@@ -29,8 +29,8 @@ public class OxygenRecharge : MonoBehaviour
                 _tempFood.transform.rotation = Quaternion.Euler(0f, -143.518f, 2.082f);
             }
             
-            GameManager.Instance._tank1OxygenLevel += Time.deltaTime * 15;
-            GameManager.Instance._oxygenCharging = true;
+            //GameManager.Instance._tank1OxygenLevel += Time.deltaTime * 15;
+           // GameManager.Instance._oxygenCharging = true;
         }
         else
         {

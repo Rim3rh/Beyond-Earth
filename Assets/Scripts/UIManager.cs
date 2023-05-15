@@ -49,7 +49,7 @@ public class UIManager : MonoBehaviour
         //GameManager.Instance._playerFood -= Time.deltaTime * 2;
 
         //Oxygen
-        GameManager.Instance._playerOxygen -= Time.deltaTime * 2;
+        GameManager.Instance._playerOxygen -= Time.deltaTime * 1.5f;
 
 
         //Health
@@ -90,33 +90,6 @@ public class UIManager : MonoBehaviour
 
 
 
-    public void HudInteractOn()
-    {
-        _interactCanvas.SetActive(true);
-    }
-
-    public void HudInteractOff()
-    {
-        _interactCanvas.SetActive(false);
-    }
-    public void HudBuildtOn()
-    {
-        _buildCanvas.SetActive(true);
-    }
-
-    public void HudBuildtOff()
-    {  
-        _buildCanvas.SetActive(false);
-    }
-    public void HudDigOn()
-    {
-        _digCanvas.SetActive(true);
-    }
-
-    public void HudDigOff()
-    {
-        _digCanvas.SetActive(false);
-    }
 
     public void EntrySound()
     {

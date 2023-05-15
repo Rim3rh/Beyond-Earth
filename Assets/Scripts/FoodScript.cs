@@ -25,7 +25,7 @@ public class FoodScript : MonoBehaviour
         _cookingState = 0;
 
         playerInputActions = new PlayerInputActions();
-        playerInputActions.PlayerMov.Interact.started += Interact_started;
+        playerInputActions.PlayerMov.ChangeTank.started += Interact_started;
         playerInputActions.PlayerMov.Enable();
     }
 
@@ -50,7 +50,7 @@ public class FoodScript : MonoBehaviour
 
         if (GameManager.Instance._FixedParts == 3 && cont < 1)
         {
-
+            GameManager.Instance._replaceWithGoodTank = true;
             _lestGetGoing.Play("Exit");
             _plantFlag.Play("Entry");
             cont++;
@@ -66,15 +66,19 @@ public class FoodScript : MonoBehaviour
             if (cont < 1)
             {
                 _kek.Play();
+                
                 cont++;
+                this.gameObject.tag = "Consume";
             }
         }
         
 
-            if (_cooking)
+            if (_cooking )
             {
+                 this.gameObject.layer = 0;
+               //  this.gameObject.tag = "Empty";
 
-                _cookingState += Time.deltaTime * 10;
+            _cookingState += Time.deltaTime * 10;
             
             }
 
@@ -92,13 +96,13 @@ public class FoodScript : MonoBehaviour
             GameManager.Instance._skipFirstMision++;
         }
 
-        GameManager.Instance._disable = true;
-        GameManager.Instance.AddOxygen(75);
+        //GameManager.Instance._disable = true;
+        GameManager.Instance.AddOxygen(90);
         yield return new WaitForSeconds(0.2f);
-        GameManager.Instance._disable = false;
-        playerInputActions.PlayerMov.Disable();
+        //GameManager.Instance._disable = false;
 
-        _interactHud.SetActive(false);
+        playerInputActions.PlayerMov.Disable();
+        //_interactHud.SetActive(false);
         Destroy(this.gameObject);
         
     }

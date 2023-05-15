@@ -44,6 +44,10 @@ public class GameManager : MonoBehaviour
 
     public AudioSource _music;
 
+    public bool _holdingRepairPart;
+
+    public bool _replaceWithGoodTank;
+
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);

@@ -29,6 +29,7 @@ public class FadeInFadeOut : MonoBehaviour
     
     IEnumerator ChangeToGameOver()
     {
+        GameManager.Instance._canMove = false;
         _playerAnim.SetTrigger("DEATH");
         
         yield return new WaitForSeconds(2f);

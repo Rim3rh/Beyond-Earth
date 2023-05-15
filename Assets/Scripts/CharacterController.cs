@@ -47,7 +47,7 @@ public class CharacterController : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(null);
             
 
-            Debug.Log("CERRAR");
+          //  Debug.Log("CERRAR");
             Time.timeScale = 1f;
             _optionsMenu.SetActive(false);
            GameManager.Instance._openedMenu = false;
@@ -56,7 +56,7 @@ public class CharacterController : MonoBehaviour
         {
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(_resumeButton);
-            Debug.Log("ABIR");
+           // Debug.Log("ABIR");
             _optionsMenu.SetActive(true);
             Time.timeScale = 0f;
            GameManager.Instance._openedMenu = true;

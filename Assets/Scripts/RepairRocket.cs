@@ -25,6 +25,8 @@ public class RepairRocket : MonoBehaviour
 
 
 
+
+
     private bool _playInside;
    // public GameObject _cam;
 
@@ -176,7 +178,7 @@ public class RepairRocket : MonoBehaviour
         }
         if (other.CompareTag("RepairPart3"))
         {
-            Debug.Log("LAÑSMJDPOANSFDJOIMANDS");
+          //  Debug.Log("LAÑSMJDPOANSFDJOIMANDS");
             _repairPartBool3 = true;
             _repairPart3 = other.gameObject;
         }

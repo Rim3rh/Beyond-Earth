@@ -12,7 +12,7 @@ public class MainMenuManager : MonoBehaviour
 
     public Animator _black;
 
-    public GameObject _mainMenu, _optionsMenu;
+    public GameObject _mainMenu, _optionsMenu, _controls, _exit;
 
     public AudioSource _music, _buttonclick;
 
@@ -72,6 +72,26 @@ public class MainMenuManager : MonoBehaviour
 
 
         
+    }
+    public void OpenControls()
+    {
+        _buttonclick.Play();
+        EventSystem.current.SetSelectedGameObject(null);
+        _controls.SetActive(true);
+        _optionsMenu.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(_exit);
+
+
+
+    }
+    public void CloseControls()
+    {
+        _buttonclick.Play();
+        EventSystem.current.SetSelectedGameObject(null);
+        _mainMenu.SetActive(true);
+        _controls.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(_play);
+
     }
     public void CloseOptions()
     {

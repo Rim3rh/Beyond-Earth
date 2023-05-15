@@ -87,17 +87,17 @@ public class DirtAssetScrip : MonoBehaviour
             {
                 if (_obj.gameObject.CompareTag("RepairPart3"))
                 {
-                    Debug.Log("CASE1");
+                   // Debug.Log("CASE1");
                     Instantiate(_obj, this.transform.position + new Vector3(0, 2.5f, 0), Quaternion.Euler(-90, 0, 0));
                 }
                 else if(_obj.gameObject.CompareTag("RepairPart2"))
                 {
-                    Debug.Log("CASE2");
+                 //   Debug.Log("CASE2");
                     Instantiate(_obj, this.transform.position + new Vector3(0, 0, 0), Quaternion.Euler(-90, 0, 0));
                 }
                 else
                 {
-                    Debug.Log("CASE2");
+                  //  Debug.Log("CASE2");
                     Instantiate(_obj, this.transform.position + new Vector3(0, 2, 0), Quaternion.Euler(-90, 0, 0));
                 }
 
@@ -106,6 +106,7 @@ public class DirtAssetScrip : MonoBehaviour
                 PickUpScript.timer2 = 0.5f;
                 _collider.SetActive(false);
                 _digHUD.SetActive(false);
+
                 Destroy(this.gameObject);
             }
            
@@ -154,7 +155,7 @@ public class DirtAssetScrip : MonoBehaviour
 
             if (GameManager.Instance._holdingShovel)
             {
-                _digHUD.SetActive(true);
+            //    _digHUD.SetActive(true);
             }
         }
         
@@ -168,7 +169,7 @@ public class DirtAssetScrip : MonoBehaviour
 
             if (GameManager.Instance._holdingShovel)
             {
-                _digHUD.SetActive(false);
+              //  _digHUD.SetActive(false);
             }
             
         }
