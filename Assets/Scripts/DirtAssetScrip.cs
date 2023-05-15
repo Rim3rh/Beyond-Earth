@@ -105,7 +105,7 @@ public class DirtAssetScrip : MonoBehaviour
                 GameManager.Instance._insideDiggingHole = false;
                 PickUpScript.timer2 = 0.5f;
                 _collider.SetActive(false);
-                _digHUD.SetActive(false);
+                //_digHUD.SetActive(false);
 
                 Destroy(this.gameObject);
             }
