@@ -47,6 +47,7 @@ public class EntrarCasaScript : MonoBehaviour
         _fade.Play("Fade");
         yield return new WaitForSeconds(0.5f);
         _player.transform.position = _houseEnter.transform.position;
+        GameManager.Instance._insideHouse = true;
         yield return new WaitForSeconds(1f);
       //  _cam.m_XAxis.Value
         GameManager.Instance._canMove = true;

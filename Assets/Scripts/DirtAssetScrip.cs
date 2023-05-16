@@ -70,10 +70,11 @@ public class DirtAssetScrip : MonoBehaviour
                 case 1:
                     if (_dirtTimer < 0f)
                     {
-                        // Debug.Log("goasl"); 
+                         Debug.Log("goasl"); 
+                       
                         _dirtCounter--;
                         _dirtTimer = 0.5f;
-                        _paticles.Play();
+                        
                         _cabar1.Play();
                     }
 
@@ -105,8 +106,8 @@ public class DirtAssetScrip : MonoBehaviour
                 GameManager.Instance._insideDiggingHole = false;
                 PickUpScript.timer2 = 0.5f;
                 _collider.SetActive(false);
-                //_digHUD.SetActive(false);
-
+                _digHUD.SetActive(false);
+                _paticles.Play();
                 Destroy(this.gameObject);
             }
            

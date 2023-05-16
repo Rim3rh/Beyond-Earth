@@ -6,10 +6,13 @@ public class OxygenRecharge : MonoBehaviour
 {
     private bool _tank1Chraging, _tank2Chraging;
     public GameObject _tank1;
-    int _cont;
+    int _cont, _estado;
     public ParticleSystem _oxygenFinish;
 
     private GameObject _tempFood;
+
+    public Material _state1, _state2, _state3;
+    public GameObject _objeto;
 
     void Start()
     {
@@ -19,12 +22,30 @@ public class OxygenRecharge : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        switch (_estado)
+        {
+            case 1:
+                _objeto.GetComponent<MeshRenderer>().material = _state3;
+
+                break;
+            case 2:
+                _objeto.GetComponent<MeshRenderer>().material = _state2;
+                break;
+            case 3:
+                _objeto.GetComponent<MeshRenderer>().material = _state3;
+                break;
+        }
+
+
         if (_tank1Chraging && !GameManager.Instance._holdingFood)
         {
-
-
             if(_tempFood != null)
             {
+                if (!GameManager.Instance._material)
+                {
+                    _estado = 2;
+                }
                 _tempFood.transform.position = new Vector3(-7.2f, 2.845f, 24.4f);
                 _tempFood.transform.rotation = Quaternion.Euler(0f, -143.518f, 2.082f);
             }
@@ -35,7 +56,15 @@ public class OxygenRecharge : MonoBehaviour
         else
         {
             GameManager.Instance._oxygenCharging = false;
+            if (!GameManager.Instance._material)
+            {
+                _estado = 3;
+            }
+           
+
         }
+
+
 
 
     }

@@ -48,6 +48,10 @@ public class GameManager : MonoBehaviour
 
     public bool _replaceWithGoodTank;
 
+    public bool _material;
+
+    
+
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);

@@ -20,6 +20,10 @@ public class FoodScript : MonoBehaviour
     public Animator _KeepBreathign, _lestGetGoing, _plantFlag;
 
     public GameObject _interactHud;
+
+    public GameObject _objeto;
+    public Material _1;
+    private bool _material;
     void Start()
     {
         _cookingState = 0;
@@ -78,7 +82,9 @@ public class FoodScript : MonoBehaviour
             if (cont < 1)
             {
                 _kek.Play();
-                
+                _objeto.GetComponent<MeshRenderer>().material = _1;
+                GameManager.Instance._material = true;
+
                 cont++;
                 this.gameObject.tag = "Consume";
             }
@@ -115,6 +121,7 @@ public class FoodScript : MonoBehaviour
 
         playerInputActions.PlayerMov.Disable();
         //_interactHud.SetActive(false);
+        GameManager.Instance._material = false;
         Destroy(this.gameObject);
         
     }

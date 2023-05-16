@@ -33,7 +33,7 @@ public class SalirDeCasaScript : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         _player.transform.position = _houseExit.transform.position;
         yield return new WaitForSeconds(1f);
-        
+        GameManager.Instance._insideHouse = false;
         GameManager.Instance._canMove = true;
 
 
