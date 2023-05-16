@@ -78,6 +78,9 @@ MonoBehaviour:
   _skipFirstMision: 0
   _openedMenu: 0
   _music: {fileID: 6716787524180148541}
+  _holdingRepairPart: 0
+  _replaceWithGoodTank: 0
+  _material: 0
 --- !u!82 &6716787524180148541
 AudioSource:
   m_ObjectHideFlags: 0
@@ -90,7 +93,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 44e6da851ba146944afc55cd15cc2e27, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.10000002
   m_Pitch: 1
   Loop: 1
   Mute: 0

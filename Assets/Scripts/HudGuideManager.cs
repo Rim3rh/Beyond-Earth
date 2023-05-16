@@ -40,7 +40,15 @@ public class HudGuideManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+        if (GameManager.Instance._canLeave)
+        {
+            _interact.SetActive(false);
+            _repair.SetActive(false);
+            _dig.SetActive(false);
+            _needParts.SetActive(false);
+            _consume.SetActive(false);
+        }
     }
 
 

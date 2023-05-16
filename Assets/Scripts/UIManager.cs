@@ -127,7 +127,7 @@ public class UIManager : MonoBehaviour
     public void GoToMainMenu()
     {
         EntrySound();
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(4);
     }
 
 

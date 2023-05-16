@@ -20,7 +20,7 @@ public class RepairRocket : MonoBehaviour
 
     public ParticleSystem _rocket;
 
-
+    public GameObject _player;
 
 
 
@@ -53,14 +53,6 @@ public class RepairRocket : MonoBehaviour
 
 
 
-        if(_playInside && GameManager.Instance._canLeave && cont4 <1)
-        {
-            //PLAY END ANIMATION
-
-            StartCoroutine(LoadEndScene());
-            cont4++;
-
-        }
 
 
 
@@ -80,6 +72,16 @@ public class RepairRocket : MonoBehaviour
 
     void Update()
     {
+
+        if (GameManager.Instance._canLeave && cont4 < 1)
+        {
+            //PLAY END ANIMATION
+
+            StartCoroutine(LoadEndScene());
+            cont4++;
+
+        }
+
 
         if (Input.GetKeyDown(KeyCode.K))
         {
@@ -217,13 +219,14 @@ public class RepairRocket : MonoBehaviour
             _playInside = false;
         }
 
+  
     }
 
 
 
-    public IEnumerator LoadEndScene()
+    private IEnumerator LoadEndScene()
     {
-
+        _player.SetActive(false);
         _endCam.Priority = 100;
         yield return new WaitForSeconds(2);
         _rocket.Play();
@@ -235,6 +238,7 @@ public class RepairRocket : MonoBehaviour
 
 
     }
+
 
 
 

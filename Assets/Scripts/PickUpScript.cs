@@ -85,7 +85,12 @@ public class PickUpScript : MonoBehaviour
     void Update()
     {
 
-      
+
+
+
+
+
+
         if (_isHolding)
         {
 
@@ -116,6 +121,12 @@ public class PickUpScript : MonoBehaviour
                 GameManager.Instance._holdingRepairPart = true;
                 GameManager.Instance._item.transform.position = _pickUpSlot.transform.position;
                 GameManager.Instance._item.transform.rotation = _pickUpSlot.transform.rotation;
+            }
+            else if (GameManager.Instance._item.CompareTag("Flag"))
+            {
+                GameManager.Instance._holdingRepairPart = false;
+                GameManager.Instance._item.transform.position = _pickUpSlot.transform.position;
+               // GameManager.Instance._item.transform.rotation = _pickUpSlot.transform.rotation;
             }
             else
             {

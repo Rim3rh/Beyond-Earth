@@ -22,10 +22,11 @@ public class FoodScript : MonoBehaviour
     public GameObject _interactHud;
 
     public GameObject _objeto;
-    public Material _1;
+    public Material _1, _2, _3;
     private bool _material;
     void Start()
     {
+        _objeto.GetComponent<MeshRenderer>().material = _2;
         _cookingState = 0;
 
         playerInputActions = new PlayerInputActions();
@@ -63,6 +64,16 @@ public class FoodScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //_objeto.GetComponent<MeshRenderer>().material = _2;
+        if (GameManager.Instance._material)
+        {
+            _objeto.GetComponent<MeshRenderer>().material = _1;
+        }
+        else
+        {
+            _objeto.GetComponent<MeshRenderer>().material = _2;
+        }
+
 
         if (GameManager.Instance._FixedParts == 3 && cont < 1)
         {
@@ -82,7 +93,7 @@ public class FoodScript : MonoBehaviour
             if (cont < 1)
             {
                 _kek.Play();
-                _objeto.GetComponent<MeshRenderer>().material = _1;
+                
                 GameManager.Instance._material = true;
 
                 cont++;
@@ -94,8 +105,8 @@ public class FoodScript : MonoBehaviour
             if (_cooking )
             {
                  this.gameObject.layer = 0;
-               //  this.gameObject.tag = "Empty";
-
+            //  this.gameObject.tag = "Empty";
+            //_objeto.GetComponent<MeshRenderer>().material = _2;
             _cookingState += Time.deltaTime * 10;
             
             }

@@ -37,7 +37,7 @@ public class PreGameManager : MonoBehaviour
         _FADE.Play("FADEOUT");
         
         yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(4);
 
     }
 }

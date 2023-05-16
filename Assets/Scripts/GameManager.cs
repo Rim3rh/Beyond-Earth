@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
 
     public bool _material;
 
+    public bool _flagPlaced;
     
 
     private void Awake()
@@ -70,7 +71,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Cursor.visible = false;
-        _musicVolume = 50;
+        _musicVolume = 0.4f;
         _sfxVolume = 50;
         _insideHouse = true;
         _canMove = true;

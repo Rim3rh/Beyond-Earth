@@ -246,6 +246,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stars: {fileID: 2049606960}
   _black: {fileID: 461110847}
+  _mainMenu: {fileID: 0}
+  _optionsMenu: {fileID: 0}
+  _controls: {fileID: 0}
+  _exit: {fileID: 0}
+  _music: {fileID: 0}
+  _buttonclick: {fileID: 0}
+  _volSlider: {fileID: 0}
+  _sfxSlider: {fileID: 0}
+  _play: {fileID: 0}
+  _options: {fileID: 0}
 --- !u!1 &218068548
 GameObject:
   m_ObjectHideFlags: 0
@@ -1194,7 +1204,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 283c88cb2228aa84895fde1d9ee74fea, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 315393ec49a87b945986121d00a41955, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

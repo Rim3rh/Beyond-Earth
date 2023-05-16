@@ -11,8 +11,8 @@ public class OxygenRecharge : MonoBehaviour
 
     private GameObject _tempFood;
 
-    public Material _state1, _state2, _state3;
-    public GameObject _objeto;
+   // public Material _state1, _state2, _state3;
+    //public GameObject _objeto;
 
     void Start()
     {
@@ -26,14 +26,14 @@ public class OxygenRecharge : MonoBehaviour
         switch (_estado)
         {
             case 1:
-                _objeto.GetComponent<MeshRenderer>().material = _state3;
+               // _objeto.GetComponent<MeshRenderer>().material = _state3;
 
                 break;
             case 2:
-                _objeto.GetComponent<MeshRenderer>().material = _state2;
+               // _objeto.GetComponent<MeshRenderer>().material = _state2;
                 break;
             case 3:
-                _objeto.GetComponent<MeshRenderer>().material = _state3;
+              //  _objeto.GetComponent<MeshRenderer>().material = _state3;
                 break;
         }
 
