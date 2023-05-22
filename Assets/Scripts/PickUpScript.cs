@@ -6,14 +6,11 @@ using UnityEngine.InputSystem;
 
 public class PickUpScript : MonoBehaviour
 {
-    public GameObject _pickUpSlot, _pickUpSlot2;
+    [SerializeField] private GameObject _pickUpSlot, _pickUpSlot2, _UiManager;
     public static bool _isHolding, _timerRuning;
     public static float timer, timer2;
     private GameObject _itemTem;
     private PlayerInputActions playerInputActions;
-
-    public GameObject _UiManager;
-
     public Animator _playerAnim;
 
     void Start()
@@ -28,7 +25,7 @@ public class PickUpScript : MonoBehaviour
 
     private void Interact_started(InputAction.CallbackContext context)
     {
-
+        //Check if menu is open so u cant grab/drop with menu open.
         if (!GameManager.Instance._openedMenu)
         {
             if (_itemTem != null)
@@ -36,32 +33,24 @@ public class PickUpScript : MonoBehaviour
                 //Grab
                 if (!_isHolding && timer <= 0 && !GameManager.Instance._oxygenCharging)
                 {
-                    if (GameManager.Instance._holdingSecondaryTank && _itemTem.CompareTag("Oxigeno2"))
+                    if (!GameManager.Instance._holdingSecondaryTank && !_itemTem.CompareTag("Oxigeno2"))
                     {
-                    }
-                    else
-                    {
-                        //_playerAnim.SetTrigger("COGER");
-                        StartCoroutine(Prueba());
+                        StartCoroutine(GrabC());
                     }
                 }
                 //Drop
                 if (_isHolding && timer2 <= 0 && !GameManager.Instance._insideDiggingHole)
                 {
-
                     if (_itemTem.CompareTag("Oxigeno"))
                     {
                         GameManager.Instance._holdingFood = false;
                     }
-                    // _playerAnim.SetTrigger("COGER");
                     _itemTem = null;
                     GameManager.Instance._item = _itemTem;
                     _isHolding = false;
                     GameManager.Instance._holdingRepairPart = false;
                     timer = 0.5f;
                     GameManager.Instance._speed = 6;
-
-                    // _UiManager.GetComponent<UIManager>().HudInteractOn();
                     _timerRuning = true;
                 }
             }
@@ -69,88 +58,50 @@ public class PickUpScript : MonoBehaviour
         }
         
     }
-    IEnumerator Prueba()
-    {
-        yield return null;
-        if (!GameManager.Instance._disable)
-        {
-            _timerRuning = false;
-            GameManager.Instance._item = _itemTem;
-            _isHolding = true;
-            timer2 = 0.5f;
-            GameManager.Instance._speed = 4;
-           // _UiManager.GetComponent<UIManager>().HudInteractOff();
-        }
-    }
+
     void Update()
     {
-
-
-
-
-
-
-
+        //Set the position of the object depending on its tag.
         if (_isHolding)
         {
-
             _playerAnim.SetBool("Grabing", true);
-
-
-            if (GameManager.Instance._item.CompareTag("RepairPart1"))
+            string _tag;
+            _tag = GameManager.Instance._item.tag;
+            switch (_tag)
             {
-                GameManager.Instance._holdingRepairPart = true;
-                GameManager.Instance._item.transform.position = new Vector3(_pickUpSlot.transform.position.x, _pickUpSlot.transform.position.y + 2, _pickUpSlot.transform.position.z);
-               // GameManager.Instance._item.transform.rotation = _pickUpSlot.transform.rotation;
-
-            }
-            else if(GameManager.Instance._item.CompareTag("RepairPart3"))
-            {
-                GameManager.Instance._holdingRepairPart = true;
-                GameManager.Instance._item.transform.position = new Vector3(_pickUpSlot2.transform.position.x, _pickUpSlot2.transform.position.y + 2 , _pickUpSlot2.transform.position.z );
-              //  GameManager.Instance._item.transform.rotation = Quaternion.Euler(-90, GameManager.Instance._item.transform.rotation.y, 0);
-            }
-            else if (GameManager.Instance._item.CompareTag("Shovel"))
-            {
-                GameManager.Instance._holdingRepairPart = false;
-                GameManager.Instance._item.transform.position = new Vector3(_pickUpSlot.transform.position.x, _pickUpSlot.transform.position.y, _pickUpSlot.transform.position.z);
-               // GameManager.Instance._item.transform.rotation = Quaternion.Euler(_pickUpSlot.transform.rotation.x, _pickUpSlot.transform.rotation.y, _pickUpSlot.transform.rotation.z);
-            }
-            else if(GameManager.Instance._item.CompareTag("RepairPart2"))
-            {
-                GameManager.Instance._holdingRepairPart = true;
-                GameManager.Instance._item.transform.position = _pickUpSlot.transform.position;
-                GameManager.Instance._item.transform.rotation = _pickUpSlot.transform.rotation;
-            }
-            else if (GameManager.Instance._item.CompareTag("Flag"))
-            {
-                GameManager.Instance._holdingRepairPart = false;
-                GameManager.Instance._item.transform.position = _pickUpSlot.transform.position;
-               // GameManager.Instance._item.transform.rotation = _pickUpSlot.transform.rotation;
-            }
-            else
-            {
-                GameManager.Instance._holdingRepairPart = false;
-                GameManager.Instance._item.transform.position = _pickUpSlot.transform.position;
-                GameManager.Instance._item.transform.rotation = _pickUpSlot.transform.rotation;
+                case "RepairPart1":
+                    GameManager.Instance._holdingRepairPart = true;
+                    GameManager.Instance._item.transform.position = new Vector3(_pickUpSlot.transform.position.x, _pickUpSlot.transform.position.y + 2, _pickUpSlot.transform.position.z);
+                    break;
+                case "RepairPart2":
+                    GameManager.Instance._holdingRepairPart = true;
+                    GameManager.Instance._item.transform.position = _pickUpSlot.transform.position;
+                    GameManager.Instance._item.transform.rotation = _pickUpSlot.transform.rotation;
+                    break;
+                case "RepairPart3":
+                    GameManager.Instance._holdingRepairPart = true;
+                    GameManager.Instance._item.transform.position = new Vector3(_pickUpSlot2.transform.position.x, _pickUpSlot2.transform.position.y + 2, _pickUpSlot2.transform.position.z);
+                    break;
+                case "Shovel":
+                    GameManager.Instance._holdingRepairPart = false;
+                    GameManager.Instance._item.transform.position = new Vector3(_pickUpSlot.transform.position.x, _pickUpSlot.transform.position.y, _pickUpSlot.transform.position.z);
+                    break;
+                case "Flag":
+                    GameManager.Instance._holdingRepairPart = false;
+                    GameManager.Instance._item.transform.position = _pickUpSlot.transform.position;
+                    break;
+                default:
+                    GameManager.Instance._holdingRepairPart = false;
+                    GameManager.Instance._item.transform.position = _pickUpSlot.transform.position;
+                    GameManager.Instance._item.transform.rotation = _pickUpSlot.transform.rotation;
+                    break;
             }
             timer2 -= Time.deltaTime;
-        }
-        else
-        {
-            _playerAnim.SetBool("Grabing", false);
-        }
-
-
-
-        if (_timerRuning)
-        {
-            timer -= Time.deltaTime;
-        }
+        }else _playerAnim.SetBool("Grabing", false);
+        if (_timerRuning) timer -= Time.deltaTime;
     }
     private void OnTriggerEnter(Collider other)
     {
-        HudsEnter(other);
         if (other.gameObject.layer == 6 && !_isHolding)
         {
             _itemTem = other.gameObject;
@@ -166,7 +117,6 @@ public class PickUpScript : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        HudsExit(other);
         if (other.gameObject.layer == 6 && !_isHolding)
         {
             _itemTem = null;
@@ -179,54 +129,18 @@ public class PickUpScript : MonoBehaviour
         {
             _itemTem = null;
         }
-
-
-
-
     }
-
-    
-    private void HudsEnter(Collider other)
+    IEnumerator GrabC()
     {
-        if (other.gameObject.layer == 6 && !_isHolding)
+        yield return null;
+        if (!GameManager.Instance._disable)
         {
-           // _UiManager.GetComponent<UIManager>().HudInteractOn();
-        }
-        if (other.gameObject.CompareTag("Oxigeno") && !GameManager.Instance._holdingMainTank && !_isHolding)
-        {
-           // _UiManager.GetComponent<UIManager>().HudInteractOn();
-        }
-        if (other.gameObject.CompareTag("Oxigeno2") && !GameManager.Instance._holdingSecondaryTank && !_isHolding)
-        {
-           // _UiManager.GetComponent<UIManager>().HudInteractOn();
-        }
-        //WHEN U ENTER THE ROCKET
-        if (other.gameObject.CompareTag("Rocket"))
-        {
-          //  _UiManager.GetComponent<UIManager>().HudBuildtOn();
+            _timerRuning = false;
+            GameManager.Instance._item = _itemTem;
+            _isHolding = true;
+            timer2 = 0.5f;
+            GameManager.Instance._speed = 4;
         }
     }
-    private void HudsExit(Collider other)
-    {
-        //WHEN U ENTER THE ROCKET
-        if (other.gameObject.CompareTag("Rocket"))
-        {
-          // _UiManager.GetComponent<UIManager>().HudBuildtOff();
-        }
 
-
-        if (other.gameObject.layer == 6 && !_isHolding)
-        {
-          //  _UiManager.GetComponent<UIManager>().HudInteractOff();
-        }
-        if (other.gameObject.CompareTag("Oxigeno") && !GameManager.Instance._holdingMainTank && !_isHolding)
-        {
-           // _UiManager.GetComponent<UIManager>().HudInteractOff();
-        }
-        if (other.gameObject.CompareTag("Oxigeno2") && !GameManager.Instance._holdingSecondaryTank && !_isHolding)
-        {
-          //  _UiManager.GetComponent<UIManager>().HudInteractOff();
-        }
-    }
-    
 }

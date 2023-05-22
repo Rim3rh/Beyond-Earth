@@ -126,7 +126,7 @@ public class FoodScript : MonoBehaviour
         }
 
         //GameManager.Instance._disable = true;
-        GameManager.Instance.AddOxygen(90);
+        GameManager.Instance._playerOxygen += 90;
         yield return new WaitForSeconds(0.2f);
         //GameManager.Instance._disable = false;
 
